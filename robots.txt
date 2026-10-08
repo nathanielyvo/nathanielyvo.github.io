@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /_
+
+Sitemap: https://nathanielyvo.github.io/sitemap.xml
