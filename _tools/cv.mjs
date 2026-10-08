@@ -38,6 +38,13 @@ try {
   await edge.send('Emulation.setEmulatedMedia', { media: 'print' });
   await edge.load(`${origin}/index.html?theme=light`);
   await edge.evaluate(`document.title = ${JSON.stringify(TITLE)}; true`);
+  // The break points in titles and venue lines (capBreaks in build.mjs) are for the screen. A printed line does not
+  // use them, and in the PDF they would leave soft hyphens in the text and split each title link into one per piece.
+  await edge.evaluate(`{
+    document.querySelectorAll('.hy').forEach((e) => e.remove());
+    const walk = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+    for (let n; (n = walk.nextNode());) if (n.data.includes('\\u00AD')) n.data = n.data.replaceAll('\\u00AD', '');
+    document.body.normalize(); true }`);
   const r = await edge.send('Page.printToPDF', {
     paperWidth: 8.27, paperHeight: 11.69, preferCSSPageSize: true, printBackground: false,
     displayHeaderFooter: false, generateTaggedPDF: true, generateDocumentOutline: true,

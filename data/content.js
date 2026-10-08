@@ -5,7 +5,7 @@ export default {
   meta: {
     siteTitle: 'Runxi Cheng · Zhipu AI',
     description:
-      'Runxi Cheng (程润曦) — researcher at Zhipu AI; Master\'s in Artificial Intelligence, Tsinghua University. Research on LLM pre-training and architectures (mixture-of-experts, conditional memory); previously model merging, knowledge distillation and reasoning.',
+      'Runxi Cheng (程润曦) — researcher at Zhipu AI; Master\'s in Artificial Intelligence, Tsinghua University. Research on LLM pre-training and architectures, such as mixture-of-experts and conditional memory; previously model merging, knowledge distillation and reasoning.',
     keywords: ['Runxi Cheng', '程润曦', 'Zhipu AI', 'Tsinghua University', 'LLM pre-training', 'Mixture-of-Experts', 'Model Merging', 'Knowledge Distillation', 'Reasoning'],
     lastUpdated: '2026-10',
     // Public address of the site, with a trailing slash. Used for the canonical link, og:url, og:image,
@@ -33,7 +33,7 @@ export default {
   // (html) paragraphs
   bio: [
     'I am a researcher at <a href="https://www.zhipuai.cn/en">Zhipu AI</a>. I received my Master\'s degree in Artificial Intelligence from <a href="https://www.tsinghua.edu.cn/en/">Tsinghua University</a> in 2026, where I was advised by Prof. Chun Yuan. Before that, I earned my Bachelor\'s degree in Information Management and Information Systems from <a href="https://ev.buaa.edu.cn/">Beihang University</a> in 2022. During my Master\'s, I was a research intern at Tencent IEG and then at <a href="https://www.microsoft.com/en-us/research/lab/microsoft-research-asia/">Microsoft Research Asia</a>. At MSRA, I was mentored by Yeyun Gong and Weizhu Chen.',
-    'My current research focuses on <b>scalable LLM pre-training and architectures</b>, with the aim of making large language models <em>more capable and more efficient to build</em>. I work on mixture-of-experts, conditional memory, and the stability and efficiency of training. Previously, I worked on <b>model merging and knowledge transfer</b> (data-free merging with task vectors, knowledge distillation) and on <b>reasoning</b> through self-training and data synthesis.',
+    'My current research focuses on <b>scalable LLM pre-training and architectures</b>, with the aim of making large language models <em>more capable and more efficient to build</em>. I work on mixture-of-experts, conditional memory, and the stability and efficiency of training. Previously, I worked on <b>model merging and knowledge transfer</b>, such as data-free merging with task vectors and knowledge distillation. I also worked on <b>reasoning</b> through self-training and data synthesis.',
   ],
 
   interests: [
@@ -45,14 +45,14 @@ export default {
     { date: '2026.09', text: '<b>Memory Grafting</b> accepted to <b>NeurIPS 2026</b>.', paper: 'memory-grafting' },
     { date: '2026.07', text: 'Graduated from <b>Tsinghua University</b> with a Master\'s degree in Artificial Intelligence and joined <b>Zhipu AI</b> as a researcher.' },
     { date: '2026.05', text: 'Released <b>Memory Grafting</b> on arXiv — scaling LLM pre-training with offline conditional memory built from a frozen pretrained model.', paper: 'memory-grafting' },
-    { date: '2026.05', text: '<b>REVIVE</b> (spectral analysis of sequential knowledge-editing collapse) accepted to <b>ACL 2026</b> Main Conference.', paper: 'knowledge-editing-collapse' },
-    { date: '2026.01', text: '<b>OptMerge</b> (unifying multimodal LLMs via model merging) accepted to <b>ICLR 2026</b>.', paper: 'mllm-merging' },
+    { date: '2026.05', text: '<b>REVIVE</b> accepted to <b>ACL 2026</b> Main Conference.', paper: 'knowledge-editing-collapse' },
+    { date: '2026.01', text: '<b>OptMerge</b> accepted to <b>ICLR 2026</b>.', paper: 'mllm-merging' },
     { date: '2025.12', text: 'The <b>SIGMA</b> technical report from Microsoft Research is out on arXiv; I contributed to its technical exploration.', paper: 'sigma' },
     { date: '2025.10', text: 'Released <b>Mixture of Neuron Experts (MoNE)</b> on arXiv — matching MoE with 50% of activated MoE-layer parameters.', paper: 'mixture-of-neuron-experts' },
     { date: '2025.08', text: '<b>HS-STaR</b> accepted to <b>EMNLP 2025</b> as an <b>Oral</b> presentation.', paper: 'hs-star' },
-    { date: '2025.05', text: 'Two papers accepted to <b>ICML 2025</b>: <b>WUDI-Merging</b> (first author) and the <b>Kendall\'s τ ranking loss</b> for distillation (co-first author).', paper: 'interference-merging' },
-    { date: '2025.02', text: 'Joined <b>Microsoft Research Asia</b> (Artificial Intelligence Reasoning Group) as a research intern.' },
-    { date: '2024.07', text: 'Joined <b>Tencent IEG</b> (Basic Research Group) as a research intern.' },
+    { date: '2025.05', text: 'Two papers accepted to <b>ICML 2025</b>: <b>WUDI-Merging</b> as first author and the <b>Kendall\'s τ ranking loss</b> for distillation as co-first author.', paper: 'interference-merging' },
+    { date: '2025.02', text: 'Joined the Artificial Intelligence Reasoning Group at <b>Microsoft Research Asia</b> as a research intern.' },
+    { date: '2024.07', text: 'Joined the Basic Research Group at <b>Tencent IEG</b> as a research intern.' },
   ],
 
   // Authors: "*" suffix = equal contribution. The site owner's name is highlighted automatically.
@@ -352,7 +352,6 @@ export default {
       short: 'SIGMA',
       title: 'SIGMA: An AI-Empowered Training Stack on Early-Life Hardware',
       authors: ['Lei Qu', 'Lianhai Ren', 'Peng Cheng', 'Rui Gao', 'Ruizhe Wang', 'Tianyu Chen', 'Xiao Liu', 'Xingjian Zhang', 'Yeyun Gong', 'Yifan Xiong', 'Yucheng Ding', 'Yuting Jiang', 'Zhenghao Lin', 'Zhongxin Guo', 'Ziyue Yang'],
-      authorsNote: 'The Microsoft Research report acknowledges me as a contributor for technical exploration (Appendix A); I am not on the author byline.',
       role: 'Contributor',
       venue: 'Technical Report',
       venueNote: '',
@@ -363,8 +362,6 @@ export default {
       tags: ['AI Infrastructure', 'Mixture-of-Experts'],
       tldr: 'An open-source training stack for early-life AI accelerators: 94.45% effective cluster utilization, and a 200B MoE model trained stably on 2,048 accelerators.',
       abstract: 'Enabling large-scale training on early-life AI accelerators faces three core challenges: frequent system disruptions and undefined failure modes that undermine reliability, numerical errors and training instabilities that threaten correctness and convergence, and complex parallelism optimization with unpredictable local noise that degrades efficiency. SIGMA is an open-source training stack that addresses these. Its core, the Lucia Training Platform (LTP), has achieved 94.45% effective cluster accelerator utilization over five months while substantially reducing node recycling and job-recovery times. On top of LTP, the Lucia Training Framework (LTF) trained SIGMA-MoE, a 200B MoE model, on 2,048 accelerators. It reached 21.08% MFU and state-of-the-art downstream accuracy, with only one stability incident over 75 days.',
-      teaser: 'assets/papers/sigma.png',
-      teaserCaption: 'Training MFU before and after resolving local noise sources.',
       links: {
         arxiv: 'https://arxiv.org/abs/2512.13488',
         pdf: 'https://arxiv.org/pdf/2512.13488',
