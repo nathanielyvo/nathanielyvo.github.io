@@ -192,9 +192,20 @@ a:hover { color: var(--accent); text-decoration-color: currentColor; }
 @media (max-width: 70em) { .contact .email { flex-basis: 100%; } }
 .contact .fmt { font-variant-caps: all-small-caps; letter-spacing: var(--track); font-size: .92em; opacity: .85; margin-left: -.1em; }
 
-.portrait { position: relative; width: 9rem; margin-top: .35rem; border: 1px solid var(--rule); }
+.portrait { position: relative; width: 100%; margin-top: .35rem; border: 1px solid var(--rule); }
 /* 3/4 is the photograph's own ratio, so `cover` crops nothing: the frame shows the whole picture. */
 .portrait img { display: block; width: 100%; height: auto; aspect-ratio: 3 / 4; object-fit: cover; }
+/* Two columns: the portrait fills the side column, which makes it taller than the name block, so it runs on down
+   beside the start of the bio and the research interests follow it. The section's two rows become one grid for
+   this; the bio still starts right under the contact line. */
+@media screen and (min-width: 55.01em) {
+  .sec-about { display: grid; grid-template-columns: minmax(0, 1fr) var(--side); grid-template-rows: auto auto 1fr; column-gap: var(--gap); align-items: start; }
+  .sec-about > .row { display: contents; }
+  .sec-about .intro > .main { grid-area: 1 / 1; margin-bottom: 2.4rem; }
+  .sec-about .intro > .side { grid-area: 1 / 2 / 3; margin-bottom: 2.4rem; }
+  .sec-about .row > .bio { grid-area: 2 / 1 / 4; }
+  .sec-about .row > .interests { grid-area: 3 / 2; }
+}
 
 .prose p { max-width: 38em; text-wrap: pretty; }
 .prose p + p { margin-top: .95em; }
@@ -546,7 +557,7 @@ html:not(.js) .pub-bib .panel-bar { display: none; }   /* the summary already sa
   .sec-head .side .filter { margin-top: 0; }
   .intro { grid-template-columns: minmax(0, 1fr) auto; column-gap: 1.75rem; }
   .intro > .side { grid-column: 2; grid-row: 1; }
-  .portrait { width: 7.75rem; margin-top: .2rem; }
+  .portrait { width: 9.75rem; margin-top: .2rem; }   /* as tall as the name block beside it */
   .interests { margin-top: 2.1rem; }
   .interests ul { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 2rem; border-top: 0; }
   .interests li { border-bottom: 0; border-top: 1px solid var(--rule); }
@@ -591,7 +602,8 @@ html:not(.js) .pub-bib .panel-bar { display: none; }   /* the summary already sa
   .intro > .side { grid-column: 2; grid-row: 1; }
   .intro .standfirst, .intro .contact { grid-column: 1 / -1; }
   .intro .standfirst { margin-top: 1.15rem; }
-  .portrait { width: 5.25rem; margin-top: 0; }
+  /* As big as the name leaves room for: the name is about 54vw wide here, so this keeps "Runxi Cheng" on one line. */
+  .portrait { width: clamp(5.25rem, 46vw - 4.25rem, 7rem); margin-top: 0; }
   .name { font-size: clamp(2.25rem, 10.6vw, 2.75rem); }
   .name-zh { display: block; margin: .55rem 0 0; font-size: 1.3rem; }
   .standfirst .position { font-size: 1.28rem; }
