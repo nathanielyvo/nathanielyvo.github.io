@@ -5,7 +5,7 @@ export default {
   meta: {
     siteTitle: 'Runxi Cheng · Zhipu AI',
     description:
-      'Runxi Cheng (程润曦) — researcher at Zhipu AI; Master\'s in Artificial Intelligence, Tsinghua University. Research on LLM pre-training, mixture-of-experts, model merging, knowledge distillation and reasoning.',
+      'Runxi Cheng (程润曦) — researcher at Zhipu AI; Master\'s in Artificial Intelligence, Tsinghua University. Research on LLM pre-training and architectures (mixture-of-experts, conditional memory); previously model merging, knowledge distillation and reasoning.',
     keywords: ['Runxi Cheng', '程润曦', 'Zhipu AI', 'Tsinghua University', 'LLM pre-training', 'Mixture-of-Experts', 'Model Merging', 'Knowledge Distillation', 'Reasoning'],
     lastUpdated: '2026-10',
     // Public address of the site, with a trailing slash. Used for the canonical link, og:url, og:image,
@@ -32,8 +32,8 @@ export default {
 
   // (html) paragraphs
   bio: [
-    'I am a researcher at <a href="https://www.zhipuai.cn/en">Zhipu AI</a>. I received my Master\'s degree in Artificial Intelligence from <a href="https://www.tsinghua.edu.cn/en/">Tsinghua University</a> in 2026, where I was advised by Prof. Chun Yuan, and my Bachelor\'s degree in Information Management and Information Systems from <a href="https://ev.buaa.edu.cn/">Beihang University</a> in 2022. During my Master\'s, I was a research intern at <a href="https://www.microsoft.com/en-us/research/lab/microsoft-research-asia/">Microsoft Research Asia</a> (Artificial Intelligence Reasoning Group), mentored by Yeyun Gong and Weizhu Chen, and at Tencent IEG (Basic Research Group).',
-    'My research aims to make large language models <em>more capable and more efficient to build</em>. I work on <b>scalable LLM pre-training and architectures</b> — mixture-of-experts and conditional memory — on <b>model merging and knowledge transfer</b>, including data-free merging with task vectors and knowledge distillation, and on <b>reasoning</b> through self-training and data synthesis.',
+    'I am a researcher at <a href="https://www.zhipuai.cn/en">Zhipu AI</a>. I received my Master\'s degree in Artificial Intelligence from <a href="https://www.tsinghua.edu.cn/en/">Tsinghua University</a> in 2026, where I was advised by Prof. Chun Yuan. Before that, I earned my Bachelor\'s degree in Information Management and Information Systems from <a href="https://ev.buaa.edu.cn/">Beihang University</a> in 2022. During my Master\'s, I was a research intern at Tencent IEG and then at <a href="https://www.microsoft.com/en-us/research/lab/microsoft-research-asia/">Microsoft Research Asia</a>. At MSRA, I was mentored by Yeyun Gong and Weizhu Chen.',
+    'My current research focuses on <b>scalable LLM pre-training and architectures</b>, with the aim of making large language models <em>more capable and more efficient to build</em>. I work on mixture-of-experts, conditional memory, and the stability and efficiency of training. Previously, I worked on <b>model merging and knowledge transfer</b> (data-free merging with task vectors, knowledge distillation) and on <b>reasoning</b> through self-training and data synthesis.',
   ],
 
   interests: [
@@ -43,7 +43,7 @@ export default {
   // newest first; date format YYYY.MM; text is (html) and may reference papers by id via {paper:id}
   news: [
     { date: '2026.09', text: '<b>Memory Grafting</b> accepted to <b>NeurIPS 2026</b>.', paper: 'memory-grafting' },
-    { date: '2026.07', text: 'Graduated from <b>Tsinghua University</b> with a Master\'s degree in Artificial Intelligence; now a researcher at <b>Zhipu AI</b>.' },
+    { date: '2026.07', text: 'Graduated from <b>Tsinghua University</b> with a Master\'s degree in Artificial Intelligence and joined <b>Zhipu AI</b> as a researcher.' },
     { date: '2026.05', text: 'Released <b>Memory Grafting</b> on arXiv — scaling LLM pre-training with offline conditional memory built from a frozen pretrained model.', paper: 'memory-grafting' },
     { date: '2026.05', text: '<b>REVIVE</b> (spectral analysis of sequential knowledge-editing collapse) accepted to <b>ACL 2026</b> Main Conference.', paper: 'knowledge-editing-collapse' },
     { date: '2026.01', text: '<b>OptMerge</b> (unifying multimodal LLMs via model merging) accepted to <b>ICLR 2026</b>.', paper: 'mllm-merging' },
@@ -154,7 +154,6 @@ export default {
       id: 'mllm-merging',
       short: 'OptMerge',
       title: 'OptMerge: Unifying Multimodal LLM Capabilities and Modalities via Model Merging',
-      titleAlt: 'Previously titled “Unifying Multimodal Large Language Model Capabilities and Modalities via Model Merging”.',
       authors: ['Yongxian Wei', 'Runxi Cheng', 'Weike Jin', 'Enneng Yang', 'Li Shen', 'Lu Hou', 'Sinan Du', 'Chun Yuan', 'Xiaochun Cao', 'Dacheng Tao'],
       venue: 'ICLR 2026',
       venueNote: '',
@@ -383,12 +382,13 @@ export default {
     },
   ],
 
+  // Positions only: the owner had the work descriptions and the related-work lines taken off the page. build.mjs
+  // renders `points: ['…']` and `outputs: ['paper-id', …]` again if they are added back to an entry.
   experience: [
     {
-      // The owner gave the year (graduated 2026.07, researcher here since); put the month in once it is confirmed.
       org: 'Zhipu AI',
       role: 'Researcher',
-      period: '2026 – Present',
+      period: '2026.07 – Present',
       location: 'Beijing',
     },
     {
@@ -398,12 +398,6 @@ export default {
       period: '2025.02 – 2026.02',
       location: 'Beijing',
       logo: 'msra',
-      points: [
-        'Contributed to the design and implementation of MSRA\'s next-generation large language model.',
-        'Foundational research on LLM pre-training methodology, with an emphasis on training stability and efficiency.',
-        'Research on optimizing mixture-of-experts (MoE) architectures for parameter efficiency and inference performance.',
-      ],
-      outputs: ['mixture-of-neuron-experts', 'memory-grafting', 'sigma'],
     },
     {
       org: 'Tencent',
@@ -412,11 +406,6 @@ export default {
       period: '2024.07 – 2025.01',
       location: 'Shenzhen',
       logo: 'tencent',
-      points: [
-        'Research on model merging and parameter-efficient fine-tuning of large language models.',
-        'Completed two papers on model merging, one of which was accepted to ICML 2025.',
-      ],
-      outputs: [],
     },
   ],
 
