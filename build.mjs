@@ -212,8 +212,10 @@ const GROUPS = [
 const statusOf = (p) => (isContribution(p) ? 'contribution' : p.status);
 /** 'first author' | 'co-first author' | '' — read from the byline ('*' = equal contribution), firstAuthor as a fallback.
  *  Equal contribution means the owner and at least one other author are starred and everyone before him is starred,
- *  so "Runxi Cheng*, Feng Xiong*" is co-first even though he is listed first. */
+ *  so "Runxi Cheng*, Feng Xiong*" is co-first even though he is listed first — unless the paper sets `authorRole`,
+ *  which always wins, because which of several equal contributors counts as "the" first author is the owner's call. */
 function ownerRole(p) {
+  if (p.authorRole !== undefined) return p.authorRole;
   const i = p.authors.findIndex((a) => a.replace(/\*+$/, '').trim() === OWNER);
   if (i < 0) return '';
   const star = (a) => /\*$/.test(a);
@@ -657,12 +659,21 @@ function skills() {
 
 /* ═════════════════════════ page chrome ═════════════════════════ */
 
-const NAV = [
-  // No "About": the wordmark already links to the top of the page, and the shorter bar keeps the inline navigation
-  // on the grid down to smaller windows.
-  ['news', 'News'], ['publications', 'Publications'], ['experience', 'Experience'],
-  ['education', 'Education'], ['honors', 'Honors'], ['projects', 'Projects'], ['skills', 'Skills'],
+const NAV_SECTIONS = [
+  // One list drives both the navigation bar and the body, so emptying a list in content.js removes the section
+  // and its nav link together — a bar linking to a heading that is not on the page is worse than a shorter bar.
+  // No "About": the wordmark already links to the top of the page, and the shorter bar keeps the inline
+  // navigation on the grid down to smaller windows.
+  ['news', 'News', news, () => C.news],
+  ['publications', 'Publications', publications, () => C.publications],
+  ['experience', 'Experience', experience, () => C.experience],
+  ['education', 'Education', education, () => C.education],
+  ['honors', 'Honors', honors, () => C.honors],
+  ['projects', 'Projects', projects, () => C.projects],
+  ['skills', 'Skills', skills, () => C.skills],
 ];
+const LIVE_SECTIONS = NAV_SECTIONS.filter(([, , , data]) => (data() || []).length);
+const NAV = LIVE_SECTIONS.map(([id, label]) => [id, label]);
 
 /** Research interests, then any keyword not already covered by one (compared case-insensitively). */
 function knowsAbout() {
@@ -796,13 +807,7 @@ ${head({ title: C.meta.siteTitle, description: C.meta.description, canonical: SI
 ${masthead()}
 <main id="main" class="page">
   ${about()}
-  ${news()}
-  ${publications()}
-  ${experience()}
-  ${education()}
-  ${honors()}
-  ${projects()}
-  ${skills()}
+  ${LIVE_SECTIONS.map(([, , render]) => render()).join('\n  ')}
 </main>
 ${footer()}
 ${lightbox()}

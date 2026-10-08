@@ -7,7 +7,7 @@ export default {
     description:
       'Runxi Cheng (程润曦) — Master\'s student in Artificial Intelligence at Tsinghua University. Research on LLM pre-training, mixture-of-experts, model merging, knowledge distillation and reasoning.',
     keywords: ['Runxi Cheng', '程润曦', 'Tsinghua University', 'LLM pre-training', 'Mixture-of-Experts', 'Model Merging', 'Knowledge Distillation', 'Reasoning'],
-    lastUpdated: '2026-09',
+    lastUpdated: '2026-10',
     // Public address of the site, with a trailing slash. Used for the canonical link, og:url, og:image,
     // the JSON-LD url/@id, sitemap.xml, the link home in 404.html, and the address printed on the CV.
     url: 'https://nathanielyvo.github.io/',
@@ -32,7 +32,7 @@ export default {
 
   // (html) paragraphs
   bio: [
-    'I am advised by Prof. Chun Yuan at <a href="https://www.tsinghua.edu.cn/en/">Tsinghua University</a>. I received my Bachelor\'s degree in Information Management and Information Systems from <a href="https://ev.buaa.edu.cn/">Beihang University</a> in 2022, and have been a research intern at <a href="https://www.microsoft.com/en-us/research/lab/microsoft-research-asia/">Microsoft Research Asia</a> (Artificial Intelligence Reasoning Group) and at Tencent IEG (Basic Research Group).',
+    'I am advised by Prof. Chun Yuan at <a href="https://www.tsinghua.edu.cn/en/">Tsinghua University</a>. I received my Bachelor\'s degree in Information Management and Information Systems from <a href="https://ev.buaa.edu.cn/">Beihang University</a> in 2022, and have been a research intern at <a href="https://www.microsoft.com/en-us/research/lab/microsoft-research-asia/">Microsoft Research Asia</a> (Artificial Intelligence Reasoning Group), mentored by Yeyun Gong and Weizhu Chen, and at Tencent IEG (Basic Research Group).',
     'My research aims to make large language models <em>more capable and more efficient to build</em>. I work on <b>scalable LLM pre-training and architectures</b> — mixture-of-experts and conditional memory — on <b>model merging and knowledge transfer</b>, including data-free merging with task vectors and knowledge distillation, and on <b>reasoning</b> through self-training and data synthesis.',
   ],
 
@@ -45,13 +45,14 @@ export default {
 
   // newest first; date format YYYY.MM; text is (html) and may reference papers by id via {paper:id}
   news: [
+    { date: '2026.09', text: '<b>Memory Grafting</b> accepted to <b>NeurIPS 2026</b>.', paper: 'memory-grafting' },
     { date: '2026.05', text: 'Released <b>Memory Grafting</b> on arXiv — scaling LLM pre-training with offline conditional memory built from a frozen pretrained model.', paper: 'memory-grafting' },
     { date: '2026.05', text: '<b>REVIVE</b> (spectral analysis of sequential knowledge-editing collapse) accepted to <b>ACL 2026</b> Main Conference.', paper: 'knowledge-editing-collapse' },
     { date: '2026.01', text: '<b>OptMerge</b> (unifying multimodal LLMs via model merging) accepted to <b>ICLR 2026</b>.', paper: 'mllm-merging' },
     { date: '2025.12', text: 'The <b>SIGMA</b> technical report from Microsoft Research is out on arXiv; I contributed to its technical exploration.', paper: 'sigma' },
     { date: '2025.10', text: 'Released <b>Mixture of Neuron Experts (MoNE)</b> on arXiv — matching MoE with 50% of activated MoE-layer parameters.', paper: 'mixture-of-neuron-experts' },
     { date: '2025.08', text: '<b>HS-STaR</b> accepted to <b>EMNLP 2025</b> as an <b>Oral</b> presentation.', paper: 'hs-star' },
-    { date: '2025.05', text: 'Two papers accepted to <b>ICML 2025</b>, co-first author on both: <b>WUDI-Merging</b> and the <b>Kendall\'s τ ranking loss</b> for distillation.', paper: 'interference-merging' },
+    { date: '2025.05', text: 'Two papers accepted to <b>ICML 2025</b>: <b>WUDI-Merging</b> (first author) and the <b>Kendall\'s τ ranking loss</b> for distillation (co-first author).', paper: 'interference-merging' },
     { date: '2025.02', text: 'Joined <b>Microsoft Research Asia</b> (Artificial Intelligence Reasoning Group) as a research intern.' },
     { date: '2024.07', text: 'Joined <b>Tencent IEG</b> (Basic Research Group) as a research intern.' },
   ],
@@ -65,10 +66,10 @@ export default {
       title: 'Memory Grafting: Scaling Language Model Pre-training via Offline Conditional Memory',
       authors: ['Runxi Cheng', 'Yuchen Guan', 'Yongxian Wei', 'Qianpu Sun', 'Qixiu Li', 'Sinan Du', 'Feng Xiong', 'Chun Yuan', 'Yan Lu', 'Yeyun Gong'],
       venue: 'NeurIPS 2026',
-      venueNote: 'Under Review',
-      venueFull: 'Under review at the Conference on Neural Information Processing Systems (NeurIPS) 2026',
+      venueNote: '',
+      venueFull: 'Conference on Neural Information Processing Systems (NeurIPS) 2026',
       year: 2026,
-      status: 'preprint',
+      status: 'published',
       selected: true,
       firstAuthor: true,
       tags: ['LLM Pre-training', 'Conditional Memory'],
@@ -218,6 +219,9 @@ export default {
     },
     {
       id: 'interference-merging',
+      // Several authors are starred, but the owner is the first author of record — his call, so it overrides
+      // the "co-first" that build.mjs would otherwise infer from the byline.
+      authorRole: 'first author',
       short: 'WUDI-Merging',
       title: 'Whoever Started the Interference Should End It: Guiding Data-Free Model Merging via Task Vectors',
       authors: ['Runxi Cheng*', 'Feng Xiong*', 'Yongxian Wei', 'Wanyun Zhu', 'Chun Yuan'],
@@ -427,41 +431,15 @@ export default {
     },
   ],
 
-  projects: [
-    {
-      title: 'Research on Causal Learning',
-      role: 'Core Contributor',
-      period: '2021.01 – 2022.01',
-      location: 'Beijing',
-      points: [
-        'Surveyed domain-invariant causal learning (inspired by “Stable Prediction Across Unknown Environments”) and identified opportunities for architectural improvements.',
-        'Adapted the Conformer model to incorporate causal-invariance principles, improving stability under distribution shift.',
-        'Competed in the ICCV 2021 LargeFineFoodAI workshop fine-grained classification challenge: 89.4% accuracy, top-60 final ranking.',
-      ],
-    },
-    {
-      title: 'Aviation Material Information and Prediction System',
-      role: 'Core Contributor',
-      period: '2020.09 – 2021.07',
-      location: 'Beijing',
-      points: [
-        'Designed and implemented an integrated aviation-material information system with inventory tracking, operational simulation and demand forecasting modules.',
-        'Engineered a few-shot demand-prediction framework that keeps error below 10% under data-scarce conditions.',
-      ],
-    },
-  ],
+  // Removed from the page at the owner's request; build.mjs drops a section and its nav link
+  // together when the list is empty, so restoring it is just putting the entries back.
+  projects: [],
 
-  honors: [
-    { title: 'Meritorious Graduate of Tsinghua University', org: 'Tsinghua University', year: '' },
-    { title: 'First Prize Scholarship of Tsinghua University', org: 'Tsinghua University', year: '2025' },
-    { title: 'Second Prize (Beijing), National College Students Mathematical Modeling Competition', org: 'CUMCM', year: '' },
-    { title: 'Special Prize, Beihang University Mathematical Modeling Competition', org: 'Beihang University', year: '' },
-    { title: 'Merit Award, Beihang “Qixian Cup”', org: 'Beihang University', year: '' },
-    { title: 'Subject Competition First Prize Scholarship', org: 'Beihang University', year: '2020' },
-  ],
+  // Removed from the page at the owner's request; build.mjs drops a section and its nav link
+  // together when the list is empty, so restoring it is just putting the entries back.
+  honors: [],
 
-  skills: [
-    { label: 'Programming', value: 'Python, C, MATLAB' },
-    { label: 'Languages', value: 'Chinese (native), English (CET-6)' },
-  ],
+  // Removed from the page at the owner's request; build.mjs drops a section and its nav link
+  // together when the list is empty, so restoring it is just putting the entries back.
+  skills: [],
 };
