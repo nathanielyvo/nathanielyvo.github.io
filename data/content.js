@@ -3,10 +3,10 @@
 
 export default {
   meta: {
-    siteTitle: 'Runxi Cheng · Tsinghua University',
+    siteTitle: 'Runxi Cheng · Zhipu AI',
     description:
-      'Runxi Cheng (程润曦) — Master\'s student in Artificial Intelligence at Tsinghua University. Research on LLM pre-training, mixture-of-experts, model merging, knowledge distillation and reasoning.',
-    keywords: ['Runxi Cheng', '程润曦', 'Tsinghua University', 'LLM pre-training', 'Mixture-of-Experts', 'Model Merging', 'Knowledge Distillation', 'Reasoning'],
+      'Runxi Cheng (程润曦) — researcher at Zhipu AI; Master\'s in Artificial Intelligence, Tsinghua University. Research on LLM pre-training, mixture-of-experts, model merging, knowledge distillation and reasoning.',
+    keywords: ['Runxi Cheng', '程润曦', 'Zhipu AI', 'Tsinghua University', 'LLM pre-training', 'Mixture-of-Experts', 'Model Merging', 'Knowledge Distillation', 'Reasoning'],
     lastUpdated: '2026-10',
     // Public address of the site, with a trailing slash. Used for the canonical link, og:url, og:image,
     // the JSON-LD url/@id, sitemap.xml, the link home in 404.html, and the address printed on the CV.
@@ -16,8 +16,8 @@ export default {
   person: {
     name: 'Runxi Cheng',
     nameZh: '程润曦',
-    position: 'Master\'s Student in Artificial Intelligence',
-    affiliation: 'Tsinghua University',
+    position: 'Researcher',
+    affiliation: 'Zhipu AI',
     location: 'Beijing, China',
     email: 'nathyyy1120@gmail.com',
     photo: 'assets/img/profile.jpg',
@@ -32,20 +32,18 @@ export default {
 
   // (html) paragraphs
   bio: [
-    'I am advised by Prof. Chun Yuan at <a href="https://www.tsinghua.edu.cn/en/">Tsinghua University</a>. I received my Bachelor\'s degree in Information Management and Information Systems from <a href="https://ev.buaa.edu.cn/">Beihang University</a> in 2022, and have been a research intern at <a href="https://www.microsoft.com/en-us/research/lab/microsoft-research-asia/">Microsoft Research Asia</a> (Artificial Intelligence Reasoning Group), mentored by Yeyun Gong and Weizhu Chen, and at Tencent IEG (Basic Research Group).',
+    'I am a researcher at <a href="https://www.zhipuai.cn/en">Zhipu AI</a>. I received my Master\'s degree in Artificial Intelligence from <a href="https://www.tsinghua.edu.cn/en/">Tsinghua University</a> in 2026, where I was advised by Prof. Chun Yuan, and my Bachelor\'s degree in Information Management and Information Systems from <a href="https://ev.buaa.edu.cn/">Beihang University</a> in 2022. During my Master\'s, I was a research intern at <a href="https://www.microsoft.com/en-us/research/lab/microsoft-research-asia/">Microsoft Research Asia</a> (Artificial Intelligence Reasoning Group), mentored by Yeyun Gong and Weizhu Chen, and at Tencent IEG (Basic Research Group).',
     'My research aims to make large language models <em>more capable and more efficient to build</em>. I work on <b>scalable LLM pre-training and architectures</b> — mixture-of-experts and conditional memory — on <b>model merging and knowledge transfer</b>, including data-free merging with task vectors and knowledge distillation, and on <b>reasoning</b> through self-training and data synthesis.',
   ],
 
   interests: [
     { label: 'LLM Pre-training & Architecture', detail: 'Mixture-of-Experts, conditional memory, training stability & efficiency' },
-    { label: 'Model Merging', detail: 'Data-free merging, task vectors, multimodal LLM merging' },
-    { label: 'Knowledge Transfer', detail: 'Logits distillation, knowledge editing' },
-    { label: 'Reasoning', detail: 'Self-taught reasoners, solver-adaptive data synthesis' },
   ],
 
   // newest first; date format YYYY.MM; text is (html) and may reference papers by id via {paper:id}
   news: [
     { date: '2026.09', text: '<b>Memory Grafting</b> accepted to <b>NeurIPS 2026</b>.', paper: 'memory-grafting' },
+    { date: '2026.07', text: 'Graduated from <b>Tsinghua University</b> with a Master\'s degree in Artificial Intelligence; now a researcher at <b>Zhipu AI</b>.' },
     { date: '2026.05', text: 'Released <b>Memory Grafting</b> on arXiv — scaling LLM pre-training with offline conditional memory built from a frozen pretrained model.', paper: 'memory-grafting' },
     { date: '2026.05', text: '<b>REVIVE</b> (spectral analysis of sequential knowledge-editing collapse) accepted to <b>ACL 2026</b> Main Conference.', paper: 'knowledge-editing-collapse' },
     { date: '2026.01', text: '<b>OptMerge</b> (unifying multimodal LLMs via model merging) accepted to <b>ICLR 2026</b>.', paper: 'mllm-merging' },
@@ -387,6 +385,13 @@ export default {
 
   experience: [
     {
+      // The owner gave the year (graduated 2026.07, researcher here since); put the month in once it is confirmed.
+      org: 'Zhipu AI',
+      role: 'Researcher',
+      period: '2026 – Present',
+      location: 'Beijing',
+    },
+    {
       org: 'Microsoft Research Asia',
       unit: 'Artificial Intelligence Reasoning Group',
       role: 'Research Intern',
@@ -419,7 +424,7 @@ export default {
     {
       school: 'Tsinghua University',
       degree: 'Master\'s in Artificial Intelligence',
-      period: '2023.09 – Present',
+      period: '2023.09 – 2026.07',
       location: 'Beijing, China',
       // Coursework removed from the page at the owner's request. build.mjs leaves the line out when `courses`
       // is absent, so putting the string back is all it takes to restore it.

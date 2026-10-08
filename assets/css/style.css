@@ -561,6 +561,7 @@ html:not(.js) .pub-bib .panel-bar { display: none; }   /* the summary already sa
   .interests { margin-top: 2.1rem; }
   .interests ul { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 2rem; border-top: 0; }
   .interests li { border-bottom: 0; border-top: 1px solid var(--rule); }
+  .interests li:only-child { grid-column: 1 / -1; }
 
   .pub {
     grid-template-columns: var(--hang) minmax(0, 1fr) 1.75rem 12.5rem;

@@ -157,10 +157,12 @@ const txh = (html = '') => String(html).replace(/(^|>)([^<]+)/g, (m, open, text)
 
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 const MONTHS_LONG = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-/** '2025.02' → <time datetime="2025-02">Feb 2025</time>; anything else (e.g. 'Present') is returned as text. */
+/** '2025.02' → <time datetime="2025-02">Feb 2025</time>, '2026' → <time datetime="2026">2026</time>; anything else
+ *  (e.g. 'Present') is returned as text. */
 function time(s) {
-  const m = /^(\d{4})[.-](\d{2})$/.exec(s.trim());
-  return m ? `<time datetime="${m[1]}-${m[2]}">${MONTHS[+m[2] - 1]} ${m[1]}</time>` : esc(s.trim());
+  const m = /^(\d{4})(?:[.-](\d{2}))?$/.exec(s.trim());
+  if (!m) return esc(s.trim());
+  return m[2] ? `<time datetime="${m[1]}-${m[2]}">${MONTHS[+m[2] - 1]} ${m[1]}</time>` : `<time datetime="${m[1]}">${m[1]}</time>`;
 }
 /** '2025.02 – 2026.02' → two <time>s joined by an en dash. */
 const period = (p) => p.split(/\s*[–-]\s*(?=\d{4}|Present)/).map(time).join('<span class="dash">–</span>');
@@ -706,12 +708,14 @@ const NAV_SECTIONS = [
 const LIVE_SECTIONS = NAV_SECTIONS.filter(([, , , data]) => (data() || []).length);
 const NAV = LIVE_SECTIONS.map(([id, label]) => [id, label]);
 
-/** Research interests, then any keyword not already covered by one (compared case-insensitively). */
+/** Research interests, then any keyword not already covered by one (compared case-insensitively). Names of people
+ *  and institutions are keywords for search engines, not topics, so they are left out. */
 function knowsAbout() {
   const out = [];
   const covered = (k) => out.some((o) => o.toLowerCase().includes(k.toLowerCase()));
+  const names = new Set([P.name, P.affiliation, ...C.education.map((e) => e.school), ...C.experience.map((e) => e.org)]);
   for (const k of [...C.interests.map((i) => i.label), ...C.meta.keywords]) {
-    if (/[㐀-鿿]/.test(k) || k === P.name || k === P.affiliation || covered(k)) continue;
+    if (/[㐀-鿿]/.test(k) || names.has(k) || covered(k)) continue;
     out.push(k);
   }
   return out;
@@ -720,6 +724,8 @@ function knowsAbout() {
 function jsonLd() {
   const profiles = P.links.filter((l) => /^https?:/.test(l.url)).map((l) => l.url);
   const alumni = C.education.filter((e) => !/present/i.test(e.period)).map((e) => ({ '@type': 'CollegeOrUniversity', name: e.school }));
+  // A student's affiliation is the university they are still at; anyone else works for an organisation.
+  const studying = C.education.some((e) => e.school === P.affiliation && /present/i.test(e.period));
   const [locality, country] = [P.location.split(',')[0].trim(), P.location.split(',').pop().trim()];
   const data = {
     '@context': 'https://schema.org',
@@ -729,7 +735,7 @@ function jsonLd() {
     alternateName: P.nameZh,
     ...(SITE_URL ? { url: SITE_URL } : {}),
     jobTitle: P.position,
-    affiliation: { '@type': 'CollegeOrUniversity', name: P.affiliation },
+    ...(studying ? { affiliation: { '@type': 'CollegeOrUniversity', name: P.affiliation } } : { worksFor: { '@type': 'Organization', name: P.affiliation } }),
     alumniOf: alumni,
     email: `mailto:${P.email}`,
     ...(SITE_URL ? { image: absolute(P.photo) } : {}),   // schema.org wants an absolute URL; omitted until the host is known
