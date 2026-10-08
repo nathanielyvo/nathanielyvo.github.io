@@ -46,7 +46,8 @@ _tools/                  ← 维护脚本:thumbs.mjs(缩略图)、og.mjs(分享�
 
 - 直引号 `'` `"` 会转成弯引号。
 - 会议名和年份之间用不换行空格连起来(如 “ICLR 2026”)。
-- 短的连字符词不会在行尾被拆开。
+- 带数字、缩写或很短一段的连字符词(如 CET-6、top-k)不会在行尾被拆开;其他连字符词只在两端对齐的正文里断行,而且只断在自己的连字符处。
+- 正文(简介、新闻、经历条目、TL;DR、摘要)两端对齐并自动断字;窄屏和手机上改为左对齐、不断字。
 - 课程成绩里的 `A-` 显示为带真正减号的 “A−”。
 
 生成器还会做安全检查:
@@ -56,7 +57,7 @@ _tools/                  ← 维护脚本:thumbs.mjs(缩略图)、og.mjs(分享�
 
 ### 更换头像
 
-用新照片覆盖 `assets/img/profile.jpg`。页面按 4:5 的竖幅裁切显示,裁切位置略偏上。建议用至少 600×750 的照片,文件尽量小于 150 KB(现在这张只有 256×256,在高分屏上会略软)。如果换成其他文件名,同时修改 `content.js` 里的 `person.photo`。
+用新照片覆盖 `assets/img/profile.jpg`。页面按 3:4 的竖幅完整显示整张照片(其他比例会居中裁掉多出的部分),所以最好直接用 3:4 的照片。建议至少 450×600,文件尽量小于 150 KB。如果换成其他文件名,同时修改 `content.js` 里的 `person.photo`。
 
 换完后依次运行 `node _tools/og.mjs`(更新分享卡片)和 `node build.mjs`。
 
@@ -216,7 +217,8 @@ Type plain ASCII in the content; the generator handles the typography:
 
 - Straight quotes become curly quotes.
 - A venue and its year are joined by a no-break space (e.g. "ICLR 2026").
-- Short hyphenated compounds are not broken at a line end.
+- A hyphenated compound with a figure, an acronym or a very short part (CET-6, top-k) is never broken at a line end. Other compounds break only in justified prose, and only at their own hyphen.
+- Prose (bio, news, experience bullets, TL;DRs, abstracts) is justified and hyphenated; on narrow screens and phones it is set ragged-right, without hyphenation.
 - A grade written `A-` is set as "A−" with a true minus sign.
 
 The generator also runs some safety checks:
@@ -226,7 +228,7 @@ The generator also runs some safety checks:
 
 ### Replacing the photo
 
-Overwrite `assets/img/profile.jpg` with the new photo. The page crops it to a 4:5 portrait, slightly above centre. At least 600×750 works best; try to keep it under 150 KB. (The current photo is only 256×256, which looks slightly soft on high-density screens.) If you use a different file name, update `person.photo` in `content.js` too.
+Overwrite `assets/img/profile.jpg` with the new photo. The page shows the whole photo as a 3:4 portrait (any other shape is cropped evenly to fit), so a 3:4 photo works best. At least 450×600; try to keep it under 150 KB. If you use a different file name, update `person.photo` in `content.js` too.
 
 Then run `node _tools/og.mjs` (to refresh the social card) and `node build.mjs`.
 

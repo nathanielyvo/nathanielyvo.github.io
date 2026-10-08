@@ -43,17 +43,18 @@ body { width: 1200px; height: 630px; overflow: hidden; background: #fffff8; colo
   font-variant-numeric: oldstyle-nums; -webkit-font-smoothing: antialiased; }
 .frame { position: absolute; inset: 26px; border: 1px solid #e0dccf; }
 .card { position: absolute; inset: 0; padding: 84px 92px 0; }
-.text > :not(.int) { max-width: 678px; }   /* clear of the photo; the interests line may run beneath it */
+.text { max-width: 640px; }   /* clear of the photo, which now runs the full height of the card */
 .kicker { font-size: 25px; letter-spacing: .2em; font-variant-caps: all-small-caps; color: #6b665c; white-space: nowrap; }
 h1 { margin: 16px 0 0 -5px; font-size: 118px; font-weight: 400; line-height: 1; letter-spacing: -.012em; white-space: nowrap; }
 .zh { margin-top: 16px; font-family: "Songti SC", "STSong", "Noto Serif CJK SC", serif; font-size: 36px; letter-spacing: .12em; color: #6b665c; }
 .pos { margin-top: 26px; font-style: italic; font-size: 36px; line-height: 1.2; color: #45413a; }
 .rule { width: 64px; height: 3px; margin-top: 32px; background: #8b1d1d; }
-.int { margin-top: 26px; font-size: 27px; line-height: 1.35; color: #45413a; }
-.int span { white-space: nowrap; }
-.int .dot { color: #8b1d1d; margin: 0 .38em; }
+.int { margin-top: 24px; font-size: 27px; line-height: 1.38; color: #45413a; }
+.int > span { white-space: nowrap; }
+.int .dot { color: #8b1d1d; margin: 0 .14em 0 .38em; }   /* rides on the label before it, so a wrap never opens a line with "·" */
 .host { position: absolute; left: 92px; bottom: 60px; font-size: 22px; letter-spacing: .2em; font-variant-caps: all-small-caps; color: #8b1d1d; }
-.photo { position: absolute; top: 92px; right: 92px; width: 282px; height: 282px; box-sizing: border-box; border: 1px solid #e0dccf; background: #fff; padding: 10px; }
+/* 3:4, the photograph's own ratio, so the card shows all of it; top and bottom sit on the text margins */
+.photo { position: absolute; top: 92px; right: 92px; width: 333px; height: 444px; box-sizing: border-box; border: 1px solid #e0dccf; background: #fff; padding: 10px; }
 .photo img { display: block; width: 100%; height: 100%; object-fit: cover; }
 </style></head><body>
 <div class="frame"></div>
@@ -64,7 +65,7 @@ h1 { margin: 16px 0 0 -5px; font-size: 118px; font-weight: 400; line-height: 1; 
     <div class="zh" lang="zh-Hans">${esc(P.nameZh)}</div>
     <div class="pos">${esc(curly(P.position))}</div>
     <div class="rule"></div>
-    <div class="int">${C.interests.map((i) => `<span>${esc(curly(i.label))}</span>`).join('<span class="dot">·</span>')}</div>
+    <div class="int">${C.interests.map((i, k, all) => `<span>${esc(curly(i.label))}${k < all.length - 1 ? '<span class="dot">·</span>' : ''}</span>`).join(' ')}</div>
   </div>
   <div class="photo"><img src="data:${photoType};base64,${b64(P.photo)}" alt=""></div>
 </div>

@@ -101,28 +101,57 @@ function smart(s) {
     .replace(/\b(Prof|Dr|Fig|Eq|No|Vol|pp)\. (?=\S)/g, `$1.${NBSP}`)
     .replace(/ ([—–])([ \u00A0])/g, `${NBSP}$1$2`);   // a spaced dash stays with the word before it, never opens a line
 }
-/** Keep short hyphenated compounds (top-k, data-free, CET-6, Mixture-of-Experts,) on one line. Escaped text in, HTML out. */
-const keepTogether = (s) => s.replace(/[^\s<>]+/g, (w) =>
-  /[\w)\]]-[\w(]/.test(w) && w.replace(/&\w+;/g, '_').length <= 20 ? `<span class="nw">${w}</span>` : w);
+/** Mark hyphenated compounds so a line break treats them well. Escaped text in, HTML out.
+ *  Two strengths. `nw` never breaks: a compound that a break would leave with a one- or two-letter stub (top-k, co-first,
+ *  re-allocation), or that carries a figure or an acronym (CET-6, 2.8B-scale, WUDI-Merging, MoE-layer). `cpd` is every
+ *  other compound (data-free, next-generation). It stays whole in ragged text; justified prose lets it break at its
+ *  own hyphen, and only there (style.css), because one unbreakable 15-letter word is enough to stretch the line
+ *  before it into gaps. */
+const keepTogether = (s) => s.replace(/[^\s<>]+/g, (w) => {
+  const plain = w.replace(/&\w+;/g, '_');
+  if (!/[\w)\]]-[\w(]/.test(plain) || plain.length > 20) return w;
+  const parts = plain.replace(/^[^\p{L}\p{N}]+|[^\p{L}\p{N}]+$/gu, '').split('-');
+  const fragile = /\d/.test(plain) || parts[0].length <= 2 || parts.at(-1).length <= 2
+    || parts.some((x) => (x.match(/\p{Lu}/gu) || []).length >= 2);
+  return `<span class="${fragile ? 'nw' : 'cpd'}">${w}</span>`;
+});
 /** Plain text → typeset HTML. */
 const tx = (s = '') => keepTogether(smart(esc(s)));
 /** Bind a short last word to the one before it, so a paragraph never ends on a lone word ('model.', 'improvements.').
- *  The CSS asks for text-wrap: pretty as well; this covers browsers without it. */
+ *  Ragged text also has text-wrap: pretty in the CSS; this covers browsers without it.
+ *  `pair` is for justified prose (JUSTIFIED below), which binds only when the two words together are that short.
+ *  There the non-breaking space costs more: Chromium will not hyphenate the word before it, so binding "language model."
+ *  moves both words down at once and leaves the line above them full of gaps. */
 const WIDOW = 14;
-const noWidow = (s = '') => String(s).trim().replace(/ (\S{1,14})$/, NBSP + '$1');
+const JUSTIFIED = 9;
+const noWidow = (s = '', pair = Infinity) => String(s).trim()
+  .replace(/(\S+) (\S{1,14})$/, (m, a, b) => (a.length + b.length <= pair ? a + NBSP + b : m));
 /** The same for an HTML field (bio, news, points): the last space of the visible text, never one inside a tag. */
-function noWidowHtml(html = '') {
+function noWidowHtml(html = '', pair = Infinity) {
   const parts = String(html).trim().split(/(<[^>]*>)/);   // odd indexes are tags
   let tail = 0;
   for (let i = parts.length - 1; i >= 0; i -= 2) {
     const t = parts[i], k = t.lastIndexOf(' ');
     if (k < 0) { tail += t.length; if (tail > WIDOW) return html; continue; }
-    if (tail + t.length - k - 1 > WIDOW) return html;
+    tail += t.length - k - 1;
+    if (tail > WIDOW) return html;
+    const before = parts.filter((x, j) => j % 2 === 0 && j < i).join('') + t.slice(0, k);
+    if (tail + /\S*$/.exec(before)[0].length > pair) return html;
     parts[i] = t.slice(0, k) + NBSP + t.slice(k + 1);
     return parts.join('');
   }
   return html;
 }
+/** Justified prose: the last four words of a paragraph are never hyphenated. So it cannot end on a fragment such as
+ *  "ters.", and a short last line does not open with one ("sta- / bility and efficiency."); the CSS property for
+ *  that, hyphenate-limit-last, is not in Chromium. Measured on this page against the last word alone: half as many
+ *  such lines, for one or two more lines with wide gaps. Typeset HTML in. The words may sit inside closing tags
+ *  (`<b>…</b>`) and contain compounds (keepTogether); text that ends in "</b>." is left as it is. */
+const END_WORDS = 4;
+const END_TOKEN = '(?:<span class="(?:cpd|nw)">[^<>]*</span>|[^<>\\s])+';
+const END_RE = new RegExp(`(?<=^|[\\s>])((?:${END_TOKEN}[ \\u00A0]+){0,${END_WORDS - 1}}${END_TOKEN})((?:</[a-z]+>)*\\s*)$`);
+const endWord = (html) => html.replace(END_RE, (m, w, close) => (
+  !/\s/.test(w) && w.length < 6 ? m : `<span class="end">${w}</span>${close}`));   // one word under six letters never hyphenates (6 3 3)
 /** HTML field (bio, news, points) → the same treatment applied to its text nodes only. */
 const txh = (html = '') => String(html).replace(/(^|>)([^<]+)/g, (m, open, text) => open + keepTogether(smart(text)));
 
@@ -273,15 +302,15 @@ function pubForPhrase(phrase, hintId) {
 /** News text with each paper name turned into a link to its bibliography entry, e.g. "Memory Grafting [6]". */
 function newsText(n) {
   const used = new Set();
-  let html = noWidowHtml(n.text).replace(/<b>(.*?)<\/b>/g, (whole, inner) => {
+  let html = noWidowHtml(n.text, JUSTIFIED).replace(/<b>(.*?)<\/b>/g, (whole, inner) => {
     const p = pubForPhrase(stripTags(inner), n.paper);
     if (!p || used.has(p.id)) return whole;
     used.add(p.id);
     return `<a class="xref" href="#pub-${esc(p.id)}"><b>${inner}</b>${NBSP}${refN(pubNo.get(p.id))}</a>`;
   });
   html = txh(html);
-  if (n.paper && !used.has(n.paper)) html += ` ${cite(n.paper)}`;
-  return html;
+  // A citation that closes the item ends the line anyway; otherwise the last word must not hyphenate (endWord).
+  return n.paper && !used.has(n.paper) ? `${html} ${cite(n.paper)}` : endWord(html);
 }
 
 const lastUpdated = (() => {
@@ -322,7 +351,7 @@ function contactLinks() {
 
 function about() {
   const ph = imgSize(P.photo);
-  const bio = C.bio.map((para, i) => `<p>${txh(i === 0 ? leadIn(noWidowHtml(para)) : noWidowHtml(para))}</p>`).join('\n        ');
+  const bio = C.bio.map((para, i) => `<p>${endWord(txh(i === 0 ? leadIn(noWidowHtml(para, JUSTIFIED)) : noWidowHtml(para, JUSTIFIED)))}</p>`).join('\n        ');
   const interests = C.interests.map((it) => `<li><span class="int-label">${tx(it.label)}</span> <span class="int-detail">${tx(noWidow(it.detail))}</span></li>`).join('');
   return `<section id="about" class="sec sec-about" aria-labelledby="about-h">
     <div class="row intro">
@@ -457,8 +486,10 @@ function figure(p) {
           <figcaption><span class="fig-label">Figure</span> ${tx(noWidow(caption))}</figcaption>` : ''}
         </figure>`;
   }
+  // A figure more than twice as wide as the 16:10 card would fill less than half of it; that card hugs the figure.
+  const hug = w / h > 2 * 16 / 10;
   return `
-          <figure class="plate">${link}</figure>`;
+          <figure class="plate${hug ? ' plate-hug" style="--ar:' + w + '/' + h : ''}">${link}</figure>`;
 }
 
 function pubItem(p) {
@@ -488,7 +519,7 @@ function pubItem(p) {
     row.push(toggle(absId, I.abstract, 'Abstract'));
     panels.push(`
             <details class="pub-panel pub-abs" id="${absId}">${summary(I.abstract, 'Abstract')}
-              <p class="abs-text">${tx(noWidow(p.abstract))}</p>
+              <p class="abs-text">${endWord(tx(noWidow(p.abstract, JUSTIFIED)))}</p>
             </details>`);
   }
   if (p.bibtex) {
@@ -501,7 +532,7 @@ function pubItem(p) {
   }
   // A note on the byline (e.g. why the owner's name is not on it): one quiet italic line under the authors.
   const note = p.authorsNote ? `
-          <p class="pub-note">${tx(noWidow(p.authorsNote))}</p>` : '';
+          <p class="pub-note">${endWord(tx(noWidow(p.authorsNote, JUSTIFIED)))}</p>` : '';
   const dup = whereIsRedundant(p);
   return `
       <li class="pub${p.teaserWide ? ' pub--wide' : ''}${isContribution(p) ? ' pub--contrib' : ''}" id="pub-${esc(p.id)}" data-selected="${p.selected ? 'true' : 'false'}"${ownerRole(p) ? ' data-first="true"' : ''}>
@@ -516,7 +547,7 @@ function pubItem(p) {
           <p class="pub-meta"><span class="pub-venue">${venueBadge(p)}</span>${role ? `<span class="vh">, </span><span class="pub-role">${esc(role)}</span>` : ''}</p>${p.teaserWide ? '' : figure(p)}
         </div>${p.teaserWide ? figure(p) : ''}
         <div class="pub-body">${p.tldr ? `
-          <p class="pub-tldr"><span class="tldr">TL;DR</span> ${tx(noWidow(p.tldr))}</p>` : ''}${tags}
+          <p class="pub-tldr"><span class="tldr">TL;DR</span> ${endWord(tx(noWidow(p.tldr, JUSTIFIED)))}</p>` : ''}${tags}
           <div class="pub-links">${row.join('')}${panels.join('')}
           </div>
         </div>
@@ -554,7 +585,7 @@ function publications() {
   </section>`;
 }
 
-const points = (arr) => (arr?.length ? `<ul class="points">${arr.map((t) => `<li>${txh(noWidowHtml(t))}</li>`).join('')}</ul>` : '');
+const points = (arr) => (arr?.length ? `<ul class="points">${arr.map((t) => `<li>${endWord(txh(noWidowHtml(t, JUSTIFIED)))}</li>`).join('')}</ul>` : '');
 const metaSide = (e) => `<div class="side meta"><span class="when">${period(e.period)}</span>${e.location ? `<span class="where">${esc(e.location)}</span>` : ''}</div>`;
 
 function experience() {
@@ -719,7 +750,9 @@ function head({ title, description, canonical, robots = 'index, follow', assetBa
   // truthful to emit, so the image tags are left out and the Twitter card falls back to the text-only "summary".
   const hasOgFile = existsSync(join(ROOT, 'assets/img/og-image.png'));
   const hasOg = hasOgFile && !!SITE_URL;
-  const shareImg = SITE_URL ? absolute(hasOgFile ? 'assets/img/og-image.png' : P.photo) : '';
+  // Versioned like the stylesheet: sites that cache a card by its address fetch a redrawn card as a new image.
+  const shareFile = hasOgFile ? 'assets/img/og-image.png' : P.photo;
+  const shareImg = SITE_URL ? `${absolute(shareFile)}?v=${version(shareFile)}` : '';
   const shareAlt = hasOgFile ? `${P.name}, ${smart(P.position)}, ${P.affiliation}` : `Portrait of ${P.name}`;
   const personTitle = `${P.name} (${P.nameZh})`;
   return `<head>

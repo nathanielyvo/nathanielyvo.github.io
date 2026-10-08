@@ -199,7 +199,7 @@ export default {
       abstract: 'Self-taught reasoners (STaRs) enhance the mathematical reasoning abilities of large language models (LLMs) by leveraging self-generated responses for self-training. Recent studies have incorporated reward models to guide response selection or decoding, aiming to obtain higher-quality data. However, they typically allocate a uniform sampling budget across all problems, overlooking the varying utility of problems at different difficulty levels. In this work, we conduct an empirical study and find that problems near the boundary of the LLM\'s reasoning capability offer significantly greater learning utility than both easy and overly difficult ones. To identify and exploit such problems, we propose HS-STaR, a Hierarchical Sampling framework for Self-Taught Reasoners. Given a fixed sampling budget, HS-STaR first performs lightweight pre-sampling with a reward-guided difficulty estimation strategy to efficiently identify boundary-level problems. Subsequently, it dynamically reallocates the remaining budget toward these high-utility problems during a re-sampling phase, maximizing the generation of valuable training data. Extensive experiments across multiple reasoning benchmarks and backbone LLMs demonstrate that HS-STaR significantly outperforms other baselines without requiring additional sampling budget.',
       teaser: 'assets/papers/hs-star.png',
       teaserCaption: 'The HS-STaR framework: difficulty estimation by pre-sampling, budget re-allocation to boundary problems, and preference optimization.',
-      teaserWide: true,
+      // No teaserWide: the figure sits in the margin like every other paper's, at the owner's request.
       links: {
         paper: 'https://aclanthology.org/2025.emnlp-main.282/',
         pdf: 'https://aclanthology.org/2025.emnlp-main.282.pdf',
@@ -337,7 +337,7 @@ export default {
       abstract: 'Model merging has recently gained attention as an economical and scalable approach to incorporate task-specific weights from various tasks into a unified multi-task model. For example, in Task Arithmetic (TA), adding the fine-tuned weights of different tasks can enhance the model\'s performance on those tasks, while subtracting them leads to task forgetting. Although TA is highly effective, interference among task still hampers the performance of the merged model. Existing methods for handling conflicts between task generally rely on empirical selection, resulting in suboptimal performance. In this paper, we introduce an Adaptive Weight Disentanglement method. We begin by theoretically proving that task vectors employed in model merging should be orthogonal to minimize interference among tasks. Guided by this insight, we initialize redundant vectors such that, when subtracted from the original task vectors, the resulting vectors exhibit increased orthogonality. Additionally, we impose an norm constraint on the redundant vectors to preserve the performance of the task-specific models. Experimental results demonstrate the effectiveness of our proposed technique: it successfully extracts redundant vectors, and after their subtraction, the task vectors not only retain robust performance but also achieve superior fusion outcomes.',
       teaser: 'assets/papers/adaptive-weight-disentanglement.png',
       teaserCaption: 'Adaptive Weight Disentanglement: a redundant vector δ is subtracted from the task vectors to obtain mutually orthogonal task vectors before merging.',
-      teaserWide: true,
+      // No teaserWide: the figure sits in the margin like every other paper's, at the owner's request.
       links: {
         arxiv: 'https://arxiv.org/abs/2411.18729',
         pdf: 'https://arxiv.org/pdf/2411.18729',
@@ -421,14 +421,14 @@ export default {
       degree: 'Master\'s in Artificial Intelligence',
       period: '2023.09 – Present',
       location: 'Beijing, China',
-      courses: 'Artificial Neural Network (A), Big Data Analysis (A-), Artificial Intelligence Technology Frontier and Industrial Application (A-)',
+      // Coursework removed from the page at the owner's request. build.mjs leaves the line out when `courses`
+      // is absent, so putting the string back is all it takes to restore it.
     },
     {
       school: 'Beihang University',
       degree: 'Bachelor\'s in Information Management and Information Systems',
       period: '2018.09 – 2022.07',
       location: 'Beijing, China',
-      courses: 'Deep Learning and Artificial Intelligence (90), Statistical Learning (93), Modern Programming (91), C Language Programming (95)',
     },
   ],
 
