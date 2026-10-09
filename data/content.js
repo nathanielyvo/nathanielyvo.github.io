@@ -447,7 +447,7 @@ export default {
       org: 'Microsoft Research Asia',
       unit: 'Artificial Intelligence Reasoning Group',
       role: 'Research Intern',
-      period: '2025.02 – 2026.02',
+      period: '2025.02 – 2026.06',
       location: 'Beijing',
       logo: 'msra',
     },
