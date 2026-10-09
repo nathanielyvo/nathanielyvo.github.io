@@ -675,7 +675,7 @@ html:not(.js) .pub-bib .panel-bar { display: none; }   /* the summary already sa
   }
   html, body { background: #fff !important; color: #000; }
   body { font-size: 10.5pt; line-height: 1.4; }
-  .entry-logo, .masthead, .skip, .filter, .pub-links, .pub-panel, .plate, .pub-tags, .lightbox, .to-top, .theme-toggle, .au-more, .more, #news, .interests { display: none !important; }
+  .masthead, .skip, .filter, .pub-links, .pub-panel, .plate, .pub-tags, .lightbox, .to-top, .theme-toggle, .au-more, .more, #news, .interests { display: none !important; }
   .js .news-older, .pub-authors .au-hidden { display: inline !important; }
   .points li::before { color: var(--ink-3); }   /* --ctl is not reset for print: the list dash prints dark like its text */
   .bar, .sec, .colophon > .row { max-width: none; padding: 0; }
@@ -716,6 +716,10 @@ html:not(.js) .pub-bib .panel-bar { display: none; }   /* the summary already sa
   .entries { gap: 4pt; }
   .cv { gap: 6pt; }
   .entry { break-inside: avoid; }
+  /* the institution's mark at the column's left edge, as on a wide screen; print-color-adjust keeps its ink, which is a
+     background colour, in a PDF printed without backgrounds */
+  .has-logo > .main { position: relative; padding-left: 10.5mm; }
+  .has-logo .entry-logo { --logo: 7.5mm; position: absolute; left: 0; top: 50%; transform: translateY(-50%); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   .meta { font-size: 9.5pt; text-align: right; align-items: flex-end; color: #222; }
   .entry-h { font-size: 11pt; }
   .points { margin-top: 2pt; }
