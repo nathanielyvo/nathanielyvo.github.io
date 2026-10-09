@@ -293,7 +293,6 @@ export default {
       id: 'learning-to-pose-problems',
       short: 'Learning to Pose Problems',
       title: 'Learning to Pose Problems: Reasoning-Driven and Solver-Adaptive Data Synthesis',
-      titleAlt: 'Earlier arXiv versions were titled “… for Large Reasoning Models”.',
       authors: ['Yongxian Wei', 'Yilin Zhao', 'Zixuan Hu', 'Li Shen', 'Xinrui Chen', 'Runxi Cheng', 'Sinan Du', 'Hao Yu', 'Chun Yuan', 'Dian Li'],
       venue: 'Preprint',
       venueNote: 'Under Review',
