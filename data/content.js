@@ -3,7 +3,7 @@
 
 export default {
   meta: {
-    siteTitle: 'Runxi Cheng · Z.ai',
+    siteTitle: 'Runxi Cheng 程润曦 · Z.ai',
     description:
       'Runxi Cheng (程润曦) — researcher at Z.ai; Master\'s in Artificial Intelligence, Tsinghua University. Research on LLM pre-training and architectures, such as mixture-of-experts and conditional memory; previously model merging, knowledge distillation and reasoning.',
     keywords: ['Runxi Cheng', '程润曦', 'Z.ai', 'Zhipu AI', 'Tsinghua University', 'LLM pre-training', 'Mixture-of-Experts', 'Model Merging', 'Knowledge Distillation', 'Reasoning'],
