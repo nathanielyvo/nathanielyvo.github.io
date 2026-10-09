@@ -608,11 +608,8 @@ function pubItem(p) {
 function publications() {
   const total = C.publications.length;
   const selected = C.publications.filter((p) => p.selected).length;
-  const scholar = linkBy('scholar');
   const notes = `
-        <p class="legend"><span class="ast" aria-hidden="true">*</span> Equal contribution</p>${selected && selected < total ? `
-        <p class="legend legend-nums">Numbers refer to the full list.</p>` : ''}${scholar ? `
-        <p class="scholar-link"><a href="${esc(scholar.url)}"${rel(scholar.url)}>${I.scholar}<span>Also on ${esc(scholar.label)}</span></a></p>` : ''}
+        <p class="legend"><span class="ast" aria-hidden="true">*</span> Equal contribution</p>
         <p class="vh" id="pub-status" aria-live="polite"></p>`;
   // With JavaScript the list opens on "Selected" (the head script adds .pubs-sel before first paint);
   // without it every paper is shown and the filter stays hidden.

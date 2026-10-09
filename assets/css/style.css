@@ -296,13 +296,6 @@ a:hover { color: var(--accent); text-decoration-color: currentColor; }
 .sec-head .side > * + * { margin-top: .5rem; }
 .legend { font-style: italic; font-size: var(--fs-xs); }
 .legend .ast { font-style: normal; color: var(--ink-2); margin-right: .2em; }
-/* the gaps in [1] [2] [4] … only need explaining while the Selected view is on */
-.legend-nums { display: none; }
-@media screen { .js.pubs-sel .legend-nums { display: block; } }
-.scholar-link a { display: inline-flex; align-items: center; gap: .4em; font-size: var(--fs-xs); color: var(--ink-2); text-decoration: none; }
-.scholar-link .i { color: var(--ink-3); font-size: .95em; }
-.scholar-link a:hover, .scholar-link a:hover .i { color: var(--accent); }
-.scholar-link a:hover span { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .2em; }
 .filter { display: inline-flex; border: 1px solid var(--ctl); border-radius: 2px; }
 .filter button { padding: .24rem .8rem .32rem; background: none; border: 0; cursor: pointer; font-size: var(--fs-label); letter-spacing: var(--track); color: var(--ink-2); line-height: 1.2; transition: color .15s, background-color .15s; }
 .filter button + button { border-left: 1px solid var(--ctl); }
@@ -664,7 +657,7 @@ html:not(.js) .pub-bib .panel-bar { display: none; }   /* the summary already sa
   }
   html, body { background: #fff !important; color: #000; }
   body { font-size: 10.5pt; line-height: 1.4; }
-  .masthead, .skip, .filter, .scholar-link, .pub-links, .pub-panel, .plate, .pub-tags, .lightbox, .to-top, .theme-toggle, .au-more, .more, .colophon .fine, #news, .interests { display: none !important; }
+  .masthead, .skip, .filter, .pub-links, .pub-panel, .plate, .pub-tags, .lightbox, .to-top, .theme-toggle, .au-more, .more, .colophon .fine, #news, .interests { display: none !important; }
   .js .news-older, .pub-authors .au-hidden { display: inline !important; }
   .points li::before { color: var(--ink-3); }   /* --ctl is not reset for print: the list dash prints dark like its text */
   .bar, .sec, .colophon > .row { max-width: none; padding: 0; }
