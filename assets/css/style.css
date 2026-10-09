@@ -264,6 +264,23 @@ a:hover { color: var(--accent); text-decoration-color: currentColor; }
 .entry-h { font-size: var(--fs); font-weight: 560; line-height: 1.3; letter-spacing: .002em; }
 .entry-sub { margin-top: .1rem; color: var(--ink-2); }
 .entry-sub em { color: var(--ink); }
+/* The institution's mark, a one-colour silhouette in the theme's ink (build.mjs sets the mask image). On wide screens
+   it hangs in the left margin beside the name and role, like the reference numbers, so the text keeps the column edge.
+   On narrow screens, where the margin is gone, it moves to the right end of the date and name lines: those are short,
+   so the role and the rest of the entry keep the full measure (an indent there would leave wide gaps in the justified
+   lines). The marks are drawn against the right edge of their square, so each stands the same distance from the text. */
+.entry-logo { --logo: 2.8rem; display: block; width: var(--logo); height: var(--logo); background-color: var(--ink-3);
+  -webkit-mask-size: contain; mask-size: contain; -webkit-mask-position: center; mask-position: center; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; }
+@media screen and (min-width: 55.01em) {
+  .has-logo > .main { position: relative; }
+  .has-logo .entry-logo { position: absolute; right: calc(100% + .95rem); top: calc((var(--fs) * 1.3 + .1rem + var(--fs-s) * 1.5 - var(--logo)) / 2); }
+}
+@media screen and (max-width: 55em) {
+  .entry.has-logo { position: relative; }
+  .has-logo .entry-logo { --logo: 2.6rem; position: absolute; right: 0; top: .3rem; }
+  .has-logo > .side, .has-logo .entry-h { padding-right: 3.6rem; }
+}
+@media (forced-colors: active) { .entry-logo { forced-color-adjust: none; background-color: CanvasText; } }
 .points { margin-top: .55rem; color: var(--ink-2); }
 .points li, .int-topics li { position: relative; padding-left: 1.15em; }
 .points li + li { margin-top: .3rem; }
@@ -656,7 +673,7 @@ html:not(.js) .pub-bib .panel-bar { display: none; }   /* the summary already sa
   }
   html, body { background: #fff !important; color: #000; }
   body { font-size: 10.5pt; line-height: 1.4; }
-  .masthead, .skip, .filter, .pub-links, .pub-panel, .plate, .pub-tags, .lightbox, .to-top, .theme-toggle, .au-more, .more, #news, .interests { display: none !important; }
+  .entry-logo, .masthead, .skip, .filter, .pub-links, .pub-panel, .plate, .pub-tags, .lightbox, .to-top, .theme-toggle, .au-more, .more, #news, .interests { display: none !important; }
   .js .news-older, .pub-authors .au-hidden { display: inline !important; }
   .points li::before { color: var(--ink-3); }   /* --ctl is not reset for print: the list dash prints dark like its text */
   .bar, .sec, .colophon > .row { max-width: none; padding: 0; }

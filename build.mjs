@@ -634,14 +634,17 @@ function publications() {
 }
 
 const points = (arr) => (arr?.length ? `<ul class="points">${arr.map((t) => `<li>${endWord(txh(noWidowHtml(t, JUSTIFIED)))}</li>`).join('')}</ul>` : '');
+/** The institution's mark beside an entry: a one-colour silhouette (assets/img/logos/<key>.png, alpha only) used as a
+ *  mask, so it takes the ink colour of the theme. Decorative: the name is right next to it. */
+const logo = (e) => (e.logo ? `<span class="entry-logo" aria-hidden="true" style="-webkit-mask-image:url(${esc(asset(`assets/img/logos/${e.logo}.png`))});mask-image:url(${esc(asset(`assets/img/logos/${e.logo}.png`))})"></span>` : '');
 const metaSide = (e) => `<div class="side meta"><span class="when">${period(e.period)}</span>${e.location ? `<span class="where">${esc(e.location)}</span>` : ''}</div>`;
 
 function experience() {
   const items = C.experience.map((e) => {
     const outputs = [...(e.outputs || [])].filter((id) => pubNo.has(id)).sort((a, b) => pubNo.get(a) - pubNo.get(b));
     return `
-      <li class="entry row">
-        <div class="main">
+      <li class="entry row${e.logo ? ' has-logo' : ''}">
+        <div class="main">${logo(e)}
           <h3 class="entry-h">${tx(e.org)}</h3>
           <p class="entry-sub"><em>${tx(e.role)}</em>${e.unit ? `, ${tx(e.unit)}` : ''}</p>
           ${points(e.points)}${outputs.length ? `
@@ -662,8 +665,8 @@ const courses = (s) => tx(s.replace(/ \(([A-D][+-]?|\d{1,3})\)/g, (m, g) => `${N
 
 function education() {
   const items = C.education.map((e) => `
-      <li class="entry row">
-        <div class="main">
+      <li class="entry row${e.logo ? ' has-logo' : ''}">
+        <div class="main">${logo(e)}
           <h3 class="entry-h">${tx(e.school)}</h3>
           <p class="entry-sub"><em>${tx(e.degree)}</em></p>${e.courses ? `
           <p class="courses"><span class="label">Coursework</span> ${courses(e.courses)}</p>` : ''}

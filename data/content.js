@@ -44,7 +44,8 @@ export default {
   // newest first; date format YYYY.MM; text is (html) and may reference papers by id via {paper:id}
   news: [
     { date: '2026.09', text: '<b>Memory Grafting</b> accepted to <b>NeurIPS 2026</b>.', paper: 'memory-grafting' },
-    { date: '2026.07', text: 'Graduated from <b>Tsinghua University</b> with a Master\'s degree in Artificial Intelligence and joined <b>Zhipu AI</b> as a researcher.' },
+    { date: '2026.07', text: 'Joined <b>Z.ai</b> as a researcher.' },
+    { date: '2026.07', text: 'Graduated from <b>Tsinghua University</b> with a Master\'s degree in Artificial Intelligence.' },
     { date: '2026.05', text: 'Released <b>Memory Grafting</b> on arXiv — scaling LLM pre-training with offline conditional memory built from a frozen pretrained model.', paper: 'memory-grafting' },
     { date: '2026.05', text: '<b>REVIVE</b> accepted to <b>ACL 2026</b> Main Conference.', paper: 'knowledge-editing-collapse' },
     { date: '2026.01', text: '<b>OptMerge</b> accepted to <b>ICLR 2026</b>.', paper: 'mllm-merging' },
@@ -414,6 +415,7 @@ export default {
       role: 'Researcher',
       period: '2026.07 – Present',
       location: 'Beijing',
+      logo: 'zhipu',
     },
     {
       org: 'Microsoft Research Asia',
@@ -439,6 +441,7 @@ export default {
       degree: 'Master\'s in Artificial Intelligence',
       period: '2023.09 – 2026.07',
       location: 'Beijing, China',
+      logo: 'tsinghua',
       // Coursework removed from the page at the owner's request. build.mjs leaves the line out when `courses`
       // is absent, so putting the string back is all it takes to restore it.
     },
@@ -447,6 +450,7 @@ export default {
       degree: 'Bachelor\'s in Information Management and Information Systems',
       period: '2018.09 – 2022.07',
       location: 'Beijing, China',
+      logo: 'beihang',
     },
   ],
 
