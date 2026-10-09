@@ -60,7 +60,7 @@ h1 { margin: 16px 0 0 -5px; font-size: 118px; font-weight: 400; line-height: 1; 
 <div class="frame"></div>
 <div class="card">
   <div class="text">
-    <div class="kicker">${esc(P.affiliation)} · ${esc(P.location)}</div>
+    <div class="kicker">${[P.affiliation, P.location].filter(Boolean).map(esc).join(' · ')}</div>
     <h1>${esc(P.name)}</h1>
     <div class="zh" lang="zh-Hans">${esc(P.nameZh)}</div>
     <div class="pos">${esc(curly(P.position))}</div>

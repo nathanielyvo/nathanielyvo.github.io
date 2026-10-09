@@ -404,7 +404,7 @@ function about() {
     <div class="row intro">
       <div class="main">
         <h1 id="about-h" class="name"><span class="name-en">${esc(P.name)}</span> <span class="name-zh" lang="zh-Hans">${esc(P.nameZh)}</span></h1>
-        <p class="standfirst"><span class="position">${tx(P.position)}</span> <span class="aff">${esc(P.affiliation)}<span class="sep" aria-hidden="true"> · </span><span class="loc">${esc(P.location)}</span></span></p>
+        <p class="standfirst"><span class="position">${tx(P.position)}</span> <span class="aff">${P.affiliation ? `${esc(P.affiliation)}<span class="sep" aria-hidden="true"> · </span>` : ''}<span class="loc">${esc(P.location)}</span></span></p>
         <ul class="contact" aria-label="Contact and profiles">${contactLinks()}</ul>
       </div>
       <div class="side">
@@ -784,7 +784,7 @@ function jsonLd() {
     alternateName: P.nameZh,
     ...(SITE_URL ? { url: SITE_URL } : {}),
     jobTitle: P.position,
-    ...(studying ? { affiliation: { '@type': 'CollegeOrUniversity', name: P.affiliation } } : { worksFor: { '@type': 'Organization', name: P.affiliation } }),
+    ...(!P.affiliation ? {} : studying ? { affiliation: { '@type': 'CollegeOrUniversity', name: P.affiliation } } : { worksFor: { '@type': 'Organization', name: P.affiliation } }),
     alumniOf: alumni,
     email: `mailto:${P.email}`,
     ...(SITE_URL ? { image: absolute(P.photo) } : {}),   // schema.org wants an absolute URL; omitted until the host is known
@@ -808,7 +808,7 @@ function head({ title, description, canonical, robots = 'index, follow', assetBa
   // Versioned like the stylesheet: sites that cache a card by its address fetch a redrawn card as a new image.
   const shareFile = hasOgFile ? 'assets/img/og-image.png' : P.photo;
   const shareImg = SITE_URL ? `${absolute(shareFile)}?v=${version(shareFile)}` : '';
-  const shareAlt = hasOgFile ? `${P.name}, ${smart(P.position)}, ${P.affiliation}` : `Portrait of ${P.name}`;
+  const shareAlt = hasOgFile ? [P.name, smart(P.position), P.affiliation].filter(Boolean).join(', ') : `Portrait of ${P.name}`;
   const personTitle = `${P.name} (${P.nameZh})`;
   return `<head>
 <meta charset="utf-8">

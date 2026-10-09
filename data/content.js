@@ -3,10 +3,10 @@
 
 export default {
   meta: {
-    siteTitle: 'Runxi Cheng 程润曦 · Z.ai',
+    siteTitle: 'Runxi Cheng 程润曦 · LLM Pre-training',
     description:
-      'Runxi Cheng (程润曦) — researcher at Z.ai; Master\'s in Artificial Intelligence, Tsinghua University. Research on LLM pre-training and architectures, such as mixture-of-experts and conditional memory; previously model merging, knowledge distillation and reasoning.',
-    keywords: ['Runxi Cheng', '程润曦', 'Z.ai', 'Zhipu AI', 'Tsinghua University', 'LLM pre-training', 'Mixture-of-Experts', 'Model Merging', 'Knowledge Distillation', 'Reasoning'],
+      'Runxi Cheng (程润曦) — LLM pre-training researcher; Master\'s in Artificial Intelligence, Tsinghua University. Research on LLM pre-training and architectures, such as mixture-of-experts and conditional memory; previously model merging, knowledge distillation and reasoning.',
+    keywords: ['Runxi Cheng', '程润曦', 'Tsinghua University', 'LLM pre-training', 'Mixture-of-Experts', 'Model Merging', 'Knowledge Distillation', 'Reasoning'],
     lastUpdated: '2026-10',
     // Public address of the site, with a trailing slash. Used for the canonical link, og:url, og:image,
     // the JSON-LD url/@id, sitemap.xml, the link home in 404.html, and the address printed on the CV.
@@ -16,8 +16,8 @@ export default {
   person: {
     name: 'Runxi Cheng',
     nameZh: '程润曦',
-    position: 'Researcher',
-    affiliation: 'Z.ai',
+    position: 'LLM Pre-training Researcher',
+    affiliation: '',   // none shown: the standfirst, the share card and the JSON-LD leave it out when empty
     location: 'Beijing, China',
     email: 'nathyyy1120@gmail.com',
     photo: 'assets/img/profile.jpg',
@@ -32,7 +32,7 @@ export default {
 
   // (html) paragraphs
   bio: [
-    'I am a researcher at <a href="https://www.zhipuai.cn/en">Z.ai</a>. I received my Master\'s degree in Artificial Intelligence from <a href="https://www.tsinghua.edu.cn/en/">Tsinghua University</a> in 2026, where I was advised by Prof. Chun Yuan. Before that, I earned my Bachelor\'s degree in Information Management and Information Systems from <a href="https://ev.buaa.edu.cn/">Beihang University</a> in 2022. During my Master\'s, I was a research intern at Tencent IEG and then at <a href="https://www.microsoft.com/en-us/research/lab/microsoft-research-asia/">Microsoft Research Asia</a>. At MSRA, I was mentored by Yeyun Gong and Weizhu Chen.',
+    'I am a researcher working on LLM pre-training. I received my Master\'s degree in Artificial Intelligence from <a href="https://www.tsinghua.edu.cn/en/">Tsinghua University</a> in 2026, where I was advised by Prof. Chun Yuan. Before that, I earned my Bachelor\'s degree in Information Management and Information Systems from <a href="https://ev.buaa.edu.cn/">Beihang University</a> in 2022. During my Master\'s, I was a research intern at Tencent IEG and then at <a href="https://www.microsoft.com/en-us/research/lab/microsoft-research-asia/">Microsoft Research Asia</a>. At MSRA, I was mentored by Yeyun Gong and Weizhu Chen.',
     'My current research focuses on <b>scalable LLM pre-training and architectures</b>, with the aim of making large language models <em>more capable and more efficient to build</em>. I work on mixture-of-experts, conditional memory, and the stability and efficiency of training. Previously, I worked on <b>model merging and knowledge transfer</b>, such as data-free merging with task vectors and knowledge distillation. I also worked on <b>reasoning</b> through self-training and data synthesis.',
   ],
 
@@ -44,7 +44,6 @@ export default {
   // newest first; date format YYYY.MM; text is (html) and may reference papers by id via {paper:id}
   news: [
     { date: '2026.09', text: '<b>Memory Grafting</b> accepted to <b>NeurIPS 2026</b>.', paper: 'memory-grafting' },
-    { date: '2026.07', text: 'Joined <b>Z.ai</b> as a researcher.' },
     { date: '2026.07', text: 'Graduated from <b>Tsinghua University</b> with a Master\'s degree in Artificial Intelligence.' },
     { date: '2026.05', text: 'Released <b>Memory Grafting</b> on arXiv — scaling LLM pre-training with offline conditional memory built from a frozen pretrained model.', paper: 'memory-grafting' },
     { date: '2026.05', text: '<b>REVIVE</b> accepted to <b>ACL 2026</b> Main Conference.', paper: 'knowledge-editing-collapse' },
@@ -436,13 +435,6 @@ export default {
   // Positions only: the owner had the work descriptions and the related-work lines taken off the page. build.mjs
   // renders `points: ['…']` and `outputs: ['paper-id', …]` again if they are added back to an entry.
   experience: [
-    {
-      org: 'Z.ai',
-      role: 'Researcher',
-      period: '2026.07 – Present',
-      location: 'Beijing',
-      logo: 'zhipu',
-    },
     {
       org: 'Microsoft Research Asia',
       unit: 'Artificial Intelligence Reasoning Group',
