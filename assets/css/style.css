@@ -685,11 +685,10 @@ html:not(.js) .pub-bib .panel-bar { display: none; }   /* the summary already sa
   .standfirst { margin-bottom: 0; }
   .standfirst .position { font-size: 12pt; color: #000; }
   .standfirst .aff { font-size: 10.5pt; color: #222; }
-  .contact { grid-column: 2; grid-row: 1 / span 2; display: flex; flex-direction: column; align-items: flex-end; gap: 1pt; padding-top: 3pt; font-size: 9pt; }
-  .contact .i, .contact .cv { display: none; }
-  .contact a { padding: 0; color: #000; }
-  .contact a[data-print] .lbl { display: none; }
-  .contact a[data-print]::after { content: attr(data-print); }
+  .contact { grid-column: 2; grid-row: 1 / span 2; display: grid; justify-items: start; gap: 1.5pt; padding-top: 3pt; font-size: 9pt; }   /* icon + name, icons in one column */
+  .contact .cv { display: none; }
+  .contact a { padding: 0; gap: .5em; color: #000; }
+  .contact a .i { color: #333; }
   .contact .print-only { display: block !important; }
   .portrait { width: 21mm; margin: 0; padding: 0; border: 0; }
   .portrait img { filter: none !important; }

@@ -246,6 +246,7 @@ const I = {
   email: svg('<rect x="3" y="5.5" width="18" height="13" rx="1.5"/><path d="m3.6 6.6 8.4 6.6 8.4-6.6"/>'),
   scholar: svg('<path d="M12 3 1.5 9.4 12 15.8l8.2-5v5.4H22V9.4z"/><path d="M5.4 13.2v4c1.7 2.1 4 3.3 6.6 3.3s4.9-1.2 6.6-3.3v-4L12 17.2z"/>', true),
   github: svg('<path d="M12 .8a11.2 11.2 0 0 0-3.54 21.83c.56.1.77-.24.77-.54v-1.9c-3.12.68-3.78-1.33-3.78-1.33-.51-1.3-1.25-1.64-1.25-1.64-1.02-.7.08-.68.08-.68 1.13.08 1.72 1.16 1.72 1.16 1 1.72 2.63 1.22 3.27.93.1-.73.4-1.22.72-1.5-2.49-.28-5.1-1.25-5.1-5.54 0-1.22.43-2.22 1.15-3-.11-.29-.5-1.43.11-2.97 0 0 .94-.3 3.08 1.15a10.7 10.7 0 0 1 5.62 0c2.14-1.45 3.08-1.15 3.08-1.15.61 1.54.23 2.68.11 2.97.72.78 1.15 1.78 1.15 3 0 4.3-2.62 5.25-5.12 5.53.4.35.76 1.03.76 2.08v3.09c0 .3.2.65.78.54A11.2 11.2 0 0 0 12 .8Z"/>', true),
+  web: svg('<circle cx="12" cy="12" r="8.75"/><path d="M3.25 12h17.5M12 3.25c2.4 2.5 3.6 5.4 3.6 8.75s-1.2 6.25-3.6 8.75c-2.4-2.5-3.6-5.4-3.6-8.75S9.6 5.75 12 3.25z"/>'),   // a globe: the homepage
   dblp: svg('<path d="M4.5 4.5h3.2v15H4.5zM9.9 4.5h3.2v15H9.9z"/><path d="m15.2 5.3 3-.8 3.4 14.2-3 .8z"/>'),       // a shelf of books: a bibliography database
   cv: svg('<path d="M12 3.5v11.5m-4.5-4.5L12 15l4.5-4.5"/><path d="M4.5 16.5v2.5a1.5 1.5 0 0 0 1.5 1.5h12a1.5 1.5 0 0 0 1.5-1.5v-2.5"/>'), // download
   paper: svg('<path d="M2.8 5.6c3-1 6.1-.6 9.2 1.3 3.1-1.9 6.2-2.3 9.2-1.3v13.1c-3-1-6.1-.6-9.2 1.3-3.1-1.9-6.2-2.3-9.2-1.3z"/><path d="M12 6.9V20"/>'), // open proceedings
@@ -386,13 +387,12 @@ function contactLinks() {
   return P.links.map((l) => {
     const isPdf = /\.pdf$/i.test(l.url);
     const text = l.key === 'email' ? l.url.replace(/^mailto:/, '') : l.label;
-    const short = /^https?:/.test(l.url) ? ` data-print="${esc(l.url.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, ''))}"` : '';
     const cls = ['email', 'cv'].includes(l.key) ? ` class="${l.key}"` : '';
     const extra = isPdf ? `<span class="fmt">PDF</span>` : '';
-    return `<li${cls}><a href="${esc(asset(l.url))}"${rel(l.url)}${short}${isPdf ? ' type="application/pdf"' : ''}>${I[l.key] || ''}<span class="lbl">${esc(text)}</span>${extra}</a></li>`;
+    return `<li${cls}><a href="${esc(asset(l.url))}"${rel(l.url)}${isPdf ? ' type="application/pdf"' : ''}>${I[l.key] || ''}<span class="lbl">${esc(text)}</span>${extra}</a></li>`;
   }).join('') +
     // Printed copies (the page doubles as a CV) also carry the homepage address, once it is configured.
-    (SITE_URL ? `<li class="web print-only"><a href="${esc(SITE_URL)}">${esc(SITE_HOST)}</a></li>` : '');
+    (SITE_URL ? `<li class="web print-only"><a href="${esc(SITE_URL)}">${I.web}<span class="lbl">Homepage</span></a></li>` : '');
 }
 
 function about() {
