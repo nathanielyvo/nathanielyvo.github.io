@@ -3,10 +3,10 @@
 
 export default {
   meta: {
-    siteTitle: 'Runxi Cheng · Zhipu AI',
+    siteTitle: 'Runxi Cheng · Z.ai',
     description:
-      'Runxi Cheng (程润曦) — researcher at Zhipu AI; Master\'s in Artificial Intelligence, Tsinghua University. Research on LLM pre-training and architectures, such as mixture-of-experts and conditional memory; previously model merging, knowledge distillation and reasoning.',
-    keywords: ['Runxi Cheng', '程润曦', 'Zhipu AI', 'Tsinghua University', 'LLM pre-training', 'Mixture-of-Experts', 'Model Merging', 'Knowledge Distillation', 'Reasoning'],
+      'Runxi Cheng (程润曦) — researcher at Z.ai; Master\'s in Artificial Intelligence, Tsinghua University. Research on LLM pre-training and architectures, such as mixture-of-experts and conditional memory; previously model merging, knowledge distillation and reasoning.',
+    keywords: ['Runxi Cheng', '程润曦', 'Z.ai', 'Zhipu AI', 'Tsinghua University', 'LLM pre-training', 'Mixture-of-Experts', 'Model Merging', 'Knowledge Distillation', 'Reasoning'],
     lastUpdated: '2026-10',
     // Public address of the site, with a trailing slash. Used for the canonical link, og:url, og:image,
     // the JSON-LD url/@id, sitemap.xml, the link home in 404.html, and the address printed on the CV.
@@ -17,7 +17,7 @@ export default {
     name: 'Runxi Cheng',
     nameZh: '程润曦',
     position: 'Researcher',
-    affiliation: 'Zhipu AI',
+    affiliation: 'Z.ai',
     location: 'Beijing, China',
     email: 'nathyyy1120@gmail.com',
     photo: 'assets/img/profile.jpg',
@@ -32,7 +32,7 @@ export default {
 
   // (html) paragraphs
   bio: [
-    'I am a researcher at <a href="https://www.zhipuai.cn/en">Zhipu AI</a>. I received my Master\'s degree in Artificial Intelligence from <a href="https://www.tsinghua.edu.cn/en/">Tsinghua University</a> in 2026, where I was advised by Prof. Chun Yuan. Before that, I earned my Bachelor\'s degree in Information Management and Information Systems from <a href="https://ev.buaa.edu.cn/">Beihang University</a> in 2022. During my Master\'s, I was a research intern at Tencent IEG and then at <a href="https://www.microsoft.com/en-us/research/lab/microsoft-research-asia/">Microsoft Research Asia</a>. At MSRA, I was mentored by Yeyun Gong and Weizhu Chen.',
+    'I am a researcher at <a href="https://www.zhipuai.cn/en">Z.ai</a>. I received my Master\'s degree in Artificial Intelligence from <a href="https://www.tsinghua.edu.cn/en/">Tsinghua University</a> in 2026, where I was advised by Prof. Chun Yuan. Before that, I earned my Bachelor\'s degree in Information Management and Information Systems from <a href="https://ev.buaa.edu.cn/">Beihang University</a> in 2022. During my Master\'s, I was a research intern at Tencent IEG and then at <a href="https://www.microsoft.com/en-us/research/lab/microsoft-research-asia/">Microsoft Research Asia</a>. At MSRA, I was mentored by Yeyun Gong and Weizhu Chen.',
     'My current research focuses on <b>scalable LLM pre-training and architectures</b>, with the aim of making large language models <em>more capable and more efficient to build</em>. I work on mixture-of-experts, conditional memory, and the stability and efficiency of training. Previously, I worked on <b>model merging and knowledge transfer</b>, such as data-free merging with task vectors and knowledge distillation. I also worked on <b>reasoning</b> through self-training and data synthesis.',
   ],
 
@@ -376,6 +376,32 @@ export default {
 }`,
     },
     {
+      id: 'gsrender',
+      short: 'GSRender',
+      title: 'GSRender: Deduplicated Occupancy Prediction via Weakly Supervised 3D Gaussian Splatting',
+      authors: ['Qianpu Sun', 'Changyong Shu', 'Sifan Zhou', 'Runxi Cheng', 'Yongxian Wei', 'Zichen Yu', 'Dawei Yang', 'Sirui Han', 'Chun Yuan'],
+      venue: 'Preprint',
+      venueNote: '',
+      venueFull: 'arXiv preprint',
+      year: 2025,
+      status: 'preprint',
+      selected: false,
+      tags: ['3D Occupancy', 'Gaussian Splatting'],
+      tldr: 'Uses 3D Gaussian Splatting for weakly supervised 3D occupancy prediction, with a Ray Compensation module that borrows features from adjacent frames to remove duplicated predictions: +6.0 RayIoU over the previous state of the art.',
+      abstract: 'Weakly-supervised 3D occupancy perception is crucial for vision-based autonomous driving in outdoor environments. Previous methods based on NeRF often face a challenge in balancing the number of samples used. Too many samples can decrease efficiency, while too few can compromise accuracy, leading to variations in the mean Intersection over Union (mIoU) by 5-10 points. Furthermore, even with surrounding-view image inputs, only a single image is rendered from each viewpoint at any given moment. This limitation leads to duplicated predictions, which significantly impacts the practicality of the approach. However, this issue has largely been overlooked in existing research. To address this, we propose GSRender, which uses 3D Gaussian Splatting for weakly-supervised occupancy estimation, simplifying the sampling process. Additionally, we introduce the Ray Compensation module, which reduces duplicated predictions by compensating for features from adjacent frames. Finally, we redesign the dynamic loss to remove the influence of dynamic objects from adjacent frames. Extensive experiments show that our approach achieves SOTA results in RayIoU (+6.0), while also narrowing the gap with 3D-supervised methods. This work lays a solid foundation for weakly-supervised occupancy perception. The code is available at https://github.com/Jasper-sudo-Sun/GSRender.',
+      links: {
+        arxiv: 'https://arxiv.org/abs/2412.14579',
+        pdf: 'https://arxiv.org/pdf/2412.14579',
+        code: 'https://github.com/Jasper-sudo-Sun/GSRender',
+      },
+      bibtex: `@article{sun2025gsrender,
+  title   = {GSRender: Deduplicated Occupancy Prediction via Weakly Supervised 3D Gaussian Splatting},
+  author  = {Sun, Qianpu and Shu, Changyong and Zhou, Sifan and Cheng, Runxi and Wei, Yongxian and Yu, Zichen and Yang, Dawei and Han, Sirui and Yuan, Chun},
+  journal = {arXiv preprint arXiv:2412.14579},
+  year    = {2025}
+}`,
+    },
+    {
       id: 'sigma',
       short: 'SIGMA',
       title: 'SIGMA: An AI-Empowered Training Stack on Early-Life Hardware',
@@ -411,7 +437,7 @@ export default {
   // renders `points: ['…']` and `outputs: ['paper-id', …]` again if they are added back to an entry.
   experience: [
     {
-      org: 'Zhipu AI',
+      org: 'Z.ai',
       role: 'Researcher',
       period: '2026.07 – Present',
       location: 'Beijing',

@@ -665,7 +665,7 @@ html:not(.js) .pub-bib .panel-bar { display: none; }   /* the summary already sa
 
 /* ───────── print: a tidy one-column CV, black on white ───────── */
 @media print {
-  @page { margin: 15mm 16mm 17mm; }
+  @page { margin: 12mm 16mm 13mm; }
   :root, :root[data-theme="dark"], :root:not([data-theme="light"]) {
     --paper: #fff; --paper-2: #fff; --ink: #000; --ink-2: #111; --ink-3: #333; --rule: #999; --rule-strong: #999;
     --accent: #000; --accent-line: #777; --on-accent: #fff; --plate: #fff; --plate-rule: #ccc; --plate-veil: transparent;
@@ -677,6 +677,7 @@ html:not(.js) .pub-bib .panel-bar { display: none; }   /* the summary already sa
   .js .news-older, .pub-authors .au-hidden { display: inline !important; }
   .points li::before { color: var(--ink-3); }   /* --ctl is not reset for print: the list dash prints dark like its text */
   .bar, .sec, .colophon > .row { max-width: none; padding: 0; }
+  .page { padding-bottom: 0; }
   .sec { padding-top: 11pt; }
   .sec-head { margin-bottom: 6pt; padding-top: 3pt; border-top: .5pt solid #888; break-inside: avoid; break-after: avoid; }
   .sec-head h2 { font-size: 12pt; color: #000; letter-spacing: .08em; }
@@ -711,7 +712,7 @@ html:not(.js) .pub-bib .panel-bar { display: none; }   /* the summary already sa
   .row:has(> .bio) { grid-template-columns: minmax(0, 1fr); }
   .prose p + p { margin-top: 4pt; }
   .entries { gap: 4pt; }
-  .cv { gap: 7pt; }
+  .cv { gap: 6pt; }
   .entry { break-inside: avoid; }
   .meta { font-size: 9.5pt; text-align: right; align-items: flex-end; color: #222; }
   .entry-h { font-size: 11pt; }
@@ -722,8 +723,8 @@ html:not(.js) .pub-bib .panel-bar { display: none; }   /* the summary already sa
   .honors { gap: 1pt; font-size: 10pt; }
   .honors .row { align-items: baseline; }
   .g-count { display: none; }
-  .pub-group + .pub-group { margin-top: 8pt; }
-  .bib { gap: 6pt; }
+  .pub-group + .pub-group { margin-top: 6pt; }
+  .bib { gap: 5pt; }
   .pub, .pub.pub--wide { margin-left: 0; grid-template-columns: 8mm minmax(0, 1fr); grid-template-areas: "n head" "n body"; grid-template-rows: auto; break-inside: avoid; }
   .pub-side, .plate-wide { display: none !important; }
   .pub-n { font-size: 9.5pt; line-height: 1.4; padding-right: 2mm; text-align: left; color: #000; }
@@ -735,7 +736,7 @@ html:not(.js) .pub-bib .panel-bar { display: none; }   /* the summary already sa
   .nm.me { text-decoration: none; font-weight: 700; }
   .eq, .cite, .xref .cite-n, .outputs .cite .cite-n { color: #000; }
   a { text-decoration: none; color: inherit; }
-  .colophon { margin-top: 12pt; padding: 0; }
+  .colophon { margin-top: 6pt; padding: 0; }
   .colophon .row { display: block; padding-top: 4pt; background: none; border-top: .5pt solid #999; }
   .colophon > .row > * { padding-top: 0; }
   .colophon p { font-size: 8.5pt; }

@@ -140,13 +140,13 @@ const txp = (s = '') => keepNames(tx(s));
  *  piece of a paragraph that an element splits as an item of its own ("Con", "fer", "ence on Neu"); a title sits in
  *  a heading and a link, which it reads whole. cv.mjs takes both kinds out before it prints. */
 const CAP_BREAKS = new Map(`Adap-tive Ad-vanc-ing An-nual As-so-ci-a-tion Bud-get Ca-pa-bil-i-ties Char-ac-ter-i-za-tion Col-lapse
-  Com-pu-ta-tional Com-put-er Con-di-tional Con-fer-ence De-tec-tion Dif-fi-culty Dis-en-tan-gle-ment Dis-en-tan-gled Dis-til-la-tion Ear-lier Edit-ing
-  Em-pir-i-cal En-hanc-ing Es-ti-ma-tion Ex-perts Find-ings Graft-ing Guid-ing Hard-ware Hi-er-ar-chi-cal In-for-ma-tion
+  Com-pu-ta-tional Com-put-er Con-di-tional Con-fer-ence De-du-pli-cat-ed De-tec-tion Dif-fi-culty Dis-en-tan-gle-ment Dis-en-tan-gled Dis-til-la-tion Ear-lier Edit-ing
+  Em-pir-i-cal En-hanc-ing Es-ti-ma-tion Ex-perts Find-ings Gauss-ian Graft-ing Guid-ing Hard-ware Hi-er-ar-chi-cal In-for-ma-tion
   In-ter-fer-ence In-ter-na-tional Knowl-edge Lan-guage Large Learn-ing Lin-guis-tics Log-its Ma-chine Meet-ing
   Meth-ods Mem-ory Merg-ing Mit-i-ga-tion Mix-ture Modal-i-ties Model Mod-els Mul-ti-modal Nat-u-ral Neu-ral Neu-ron
-  Off-line Pa-pers Pat-tern Prob-lems Pro-cess-ing Rank-ing Re-al-lo-ca-tion Rea-son-ers Rea-son-ing Rec-og-ni-tion Rep-re-sen-ta-tions
-  Sam-pling Scal-ing Seg-men-ta-tion Se-quen-tial Should Spec-tral Stack Started Syn-the-sis Sys-tems Tech-ni-cal Train-ing Uni-fy-ing
-  Vec-tors Vi-sion Weight Who-ever`.split(/\s+/).map((w) => [w.replace(/-/g, ''), w.split('-')]));
+  Oc-cu-pan-cy Off-line Pa-pers Pat-tern Pre-dic-tion Prob-lems Pro-cess-ing Rank-ing Re-al-lo-ca-tion Rea-son-ers Rea-son-ing Rec-og-ni-tion Rep-re-sen-ta-tions
+  Sam-pling Scal-ing Seg-men-ta-tion Se-quen-tial Should Spec-tral Splat-ting Stack Su-per-vised Started Syn-the-sis Sys-tems Tech-ni-cal Train-ing Uni-fy-ing
+  Vec-tors Vi-sion Weak-ly Weight Who-ever`.split(/\s+/).map((w) => [w.replace(/-/g, ''), w.split('-')]));
 const SHY = '\u00AD';
 const capBreaks = (s = '') => {
   const toks = String(s).split(' ');
