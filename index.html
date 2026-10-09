@@ -11,7 +11,7 @@
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#15130f">
 <script>(function(){var d=document.documentElement,t=null,q=null,s=null;d.className+=' js';try{s=new URLSearchParams(location.search);q=s.get('theme')}catch(e){}if(!s||s.get('pubs')!=='all')d.className+=' pubs-sel';if(q==='dark'||q==='light')t=q;else{try{t=localStorage.getItem('theme')}catch(e){}if(t!=='dark'&&t!=='light')t=null}if(t){d.setAttribute('data-theme',t);var m=document.querySelectorAll('meta[name="theme-color"]');for(var i=0;i<m.length;i++)m[i].content=d.getAttribute('data-paper-'+t)}})();</script>
 <link rel="preload" href="assets/fonts/EBGaramond-Roman.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/css/style.css?v=260cab11">
+<link rel="stylesheet" href="assets/css/style.css?v=fdd705f2">
 <link rel="icon" href="assets/img/favicon.svg?v=9835dc98" type="image/svg+xml">
 <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
 <meta name="keywords" content="Runxi Cheng, 程润曦, Zhipu AI, Tsinghua University, LLM pre-training, Mixture-of-Experts, Model Merging, Knowledge Distillation, Reasoning">
@@ -72,6 +72,8 @@
   "knowsAbout": [
     "LLM Pre-training & Architecture",
     "Mixture-of-Experts",
+    "Conditional Memory",
+    "Training Stability & Efficiency",
     "Model Merging",
     "Knowledge Distillation",
     "Reasoning"
@@ -111,7 +113,7 @@
       </div>
       <aside class="side interests" aria-labelledby="interests-h">
         <h2 id="interests-h" class="side-h">Research Interests</h2>
-        <ul><li><span class="int-label">LLM <span class="cpd">Pre-training</span> &amp; Architecture</span> <span class="int-detail"><span class="cpd">Mixture-of-Experts,</span> conditional memory, training stability &amp; efficiency</span></li></ul>
+        <ul><li><span class="int-label">LLM <span class="cpd">Pre-training</span> &amp; Architecture</span><ul class="int-topics"><li><span class="cpd">Mixture-of-Experts</span></li><li>Conditional Memory</li><li>Training Stability &amp; Efficiency</li></ul></li></ul>
       </aside>
     </div>
   </section>

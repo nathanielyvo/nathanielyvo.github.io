@@ -398,7 +398,8 @@ function contactLinks() {
 function about() {
   const ph = imgSize(P.photo);
   const bio = C.bio.map((para, i) => `<p>${endWord(txh(i === 0 ? leadIn(noWidowHtml(para, JUSTIFIED)) : noWidowHtml(para, JUSTIFIED)))}</p>`).join('\n        ');
-  const interests = C.interests.map((it) => `<li><span class="int-label">${tx(it.label)}</span> <span class="int-detail">${txp(noWidow(it.detail, JUSTIFIED))}</span></li>`).join('');
+  const topics = (it) => (it.topics?.length ? `<ul class="int-topics">${it.topics.map((t) => `<li>${tx(t)}</li>`).join('')}</ul>` : '');
+  const interests = C.interests.map((it) => `<li><span class="int-label">${tx(it.label)}</span>${topics(it)}</li>`).join('');
   return `<section id="about" class="sec sec-about" aria-labelledby="about-h">
     <div class="row intro">
       <div class="main">
@@ -762,7 +763,7 @@ function knowsAbout() {
   const out = [];
   const covered = (k) => out.some((o) => o.toLowerCase().includes(k.toLowerCase()));
   const names = new Set([P.name, P.affiliation, ...C.education.map((e) => e.school), ...C.experience.map((e) => e.org)]);
-  for (const k of [...C.interests.map((i) => i.label), ...C.meta.keywords]) {
+  for (const k of [...C.interests.flatMap((i) => [i.label, ...(i.topics || [])]), ...C.meta.keywords]) {
     if (/[㐀-鿿]/.test(k) || names.has(k) || covered(k)) continue;
     out.push(k);
   }

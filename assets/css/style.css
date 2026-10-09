@@ -50,7 +50,7 @@
   --accent-line: rgba(139, 29, 29, .36);
   --accent-wash: rgba(139, 29, 29, .065);
   --link-line: rgba(139, 29, 29, .6);  /* underline of links set in body ink: ≥ 3:1 against the paper */
-  --ctl: #9a937f;        /* borders of controls (filter, Copy, under-review badge): ≥ 3:1 against the paper */
+  --ctl: #9a937f;        /* borders of controls (filter, Copy, under-review badge) and the list dash: ≥ 3:1 against the paper */
   --on-accent: #fffff8;
   --plate: #ffffff;
   --plate-rule: #e4e0d4;
@@ -214,10 +214,10 @@ a:hover { color: var(--accent); text-decoration-color: currentColor; }
 
 .interests { padding-top: .3rem; }
 .side-h { font-size: var(--fs-label); font-weight: 520; letter-spacing: .12em; color: var(--ink-3); margin-bottom: .6rem; }
-.interests ul { border-top: 1px solid var(--rule); }
-.interests li { padding: .6rem 0 .64rem; border-bottom: 1px solid var(--rule); line-height: 1.3; }
+.interests > ul { border-top: 1px solid var(--rule); }
+.interests > ul > li { padding: .6rem 0 .64rem; border-bottom: 1px solid var(--rule); line-height: 1.3; }
 .int-label { display: block; font-style: italic; font-size: var(--fs-s); color: var(--ink); }
-.int-detail { display: block; margin-top: .16rem; font-size: var(--fs-xs); color: var(--ink-3); }
+.int-topics { margin-top: .3rem; font-size: var(--fs-xs); line-height: 1.6; color: var(--ink-2); }   /* marked like .points */
 
 /* ───────── news: date first, then the item ───────── */
 .news { display: grid; gap: .72rem; }
@@ -265,9 +265,10 @@ a:hover { color: var(--accent); text-decoration-color: currentColor; }
 .entry-sub { margin-top: .1rem; color: var(--ink-2); }
 .entry-sub em { color: var(--ink); }
 .points { margin-top: .55rem; color: var(--ink-2); }
-.points li { position: relative; padding-left: 1.15em; }
+.points li, .int-topics li { position: relative; padding-left: 1.15em; }
 .points li + li { margin-top: .3rem; }
-.points li::before { content: "–"; position: absolute; left: 0; color: var(--ink-3); }
+/* the site's one list mark, an en dash; screen readers skip it (the empty alternative text) */
+.points li::before, .int-topics li::before { content: "–"; content: "–" / ""; position: absolute; left: 0; color: var(--ctl); }
 .outputs, .courses { margin-top: .65rem; color: var(--ink-2); }
 .outputs .cite { color: var(--ink); }
 .outputs .cite:hover { color: var(--accent); }
@@ -437,8 +438,8 @@ html:not(.js) .pub-bib .panel-bar { display: none; }   /* the summary already sa
    of one line looks as before, because the last line of a justified block is set flush left. Nothing breaks early
    either: there is no text-wrap: balance or pretty, and no measure narrower than its column. ("pretty" would pull
    words down to lengthen a short last line, and justification then stretches the line it shortened to full width.)
-   Apart from one-line labels (hints, reference numbers, the dates in print), only code (BibTeX), the centred lightbox
-   caption and one note in a narrow margin (the last rule of this section) keep their own alignment.
+   Apart from one-line labels (hints, reference numbers, the dates in print), only code (BibTeX) and the centred lightbox
+   caption keep their own alignment.
    Running text is hyphenated, to give the justifier more places to break; names and labels are not. Chromium does
    not hyphenate a capitalised word and Safari does, so titles and venue lines carry their own break points (CAP_BREAKS
    in build.mjs) and take no others: they break in the same places everywhere, and never in their last word. In
@@ -454,8 +455,8 @@ html:not(.js) .pub-bib .panel-bar { display: none; }   /* the summary already sa
    Safari does not read hyphenate-limit-chars: it gets the same 3 3 from its own properties (which also keeps out
    words under six letters), and a cap of two hyphenated lines in a row, which Chromium has no property for.
    The selector below weighs (0,2,0) because of `.honor .main`: a rule meant to override it on the same element needs
-   as much (the last rule of this section). */
-:is(.prose p, .news-item p, .points li, .pub-note, .pub-tldr, .abs-text, .int-detail, .honor .main, .skills dd, figcaption, .nf-text) {
+   as much. */
+:is(.prose p, .news-item p, .points li, .pub-note, .pub-tldr, .abs-text, .honor .main, .skills dd, figcaption, .nf-text) {
   hyphens: auto;
   -webkit-hyphens: auto;
   hyphenate-limit-chars: 6 3 3;   /* words of six letters or more, never leaving fewer than three on either side */
@@ -470,9 +471,6 @@ html:not(.js) .pub-bib .panel-bar { display: none; }   /* the summary already sa
    printed without. */
 .hy::before { content: "\AD"; content: "\AD" / ""; }
 @media print { .hy::before { content: none; } }
-/* The one place it cannot work: between 881 and 1120px the margin column is 15rem, which holds three or four words of
-   the interests note. A line with a single space has nowhere to put its slack but that space (2.4em, measured). */
-@media (min-width: 55.01em) and (max-width: 70em) { .interests .int-detail { text-align: left; hyphens: manual; -webkit-hyphens: manual; } }
 
 /* ───────── footer ───────── */
 .colophon { margin-top: 4.25rem; padding: 0 0 3rem; }
@@ -565,9 +563,9 @@ html:not(.js) .pub-bib .panel-bar { display: none; }   /* the summary already sa
   .intro > .side { grid-column: 2; grid-row: 1; }
   .portrait { width: 9.75rem; margin-top: .2rem; }   /* as tall as the name block beside it */
   .interests { margin-top: 2.1rem; }
-  .interests ul { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 2rem; border-top: 0; }
-  .interests li { border-bottom: 0; border-top: 1px solid var(--rule); }
-  .interests li:only-child { grid-column: 1 / -1; }
+  .interests > ul { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 2rem; border-top: 0; }
+  .interests > ul > li { border-bottom: 0; border-top: 1px solid var(--rule); }
+  .interests > ul > li:only-child { grid-column: 1 / -1; }
 
   .pub {
     grid-template-columns: var(--hang) minmax(0, 1fr) 1.75rem 12.5rem;
@@ -616,7 +614,7 @@ html:not(.js) .pub-bib .panel-bar { display: none; }   /* the summary already sa
   .standfirst .aff .loc { display: block; }
   .contact { display: grid; grid-template-columns: auto auto; justify-content: start; gap: .2rem 1.75rem; font-size: var(--fs-s); }
   .contact .email { grid-column: 1 / -1; }
-  .interests ul { grid-template-columns: minmax(0, 1fr); }
+  .interests > ul { grid-template-columns: minmax(0, 1fr); }
   .sec-head h2 { font-size: 1.34rem; }
 
   .news { gap: .95rem; }
@@ -668,6 +666,7 @@ html:not(.js) .pub-bib .panel-bar { display: none; }   /* the summary already sa
   body { font-size: 10.5pt; line-height: 1.4; }
   .masthead, .skip, .filter, .scholar-link, .pub-links, .pub-panel, .plate, .pub-tags, .lightbox, .to-top, .theme-toggle, .au-more, .more, .colophon .fine, #news, .interests { display: none !important; }
   .js .news-older, .pub-authors .au-hidden { display: inline !important; }
+  .points li::before { color: var(--ink-3); }   /* --ctl is not reset for print: the list dash prints dark like its text */
   .bar, .sec, .colophon > .row { max-width: none; padding: 0; }
   .sec { padding-top: 11pt; }
   .sec-head { margin-bottom: 6pt; padding-top: 3pt; border-top: .5pt solid #888; break-inside: avoid; break-after: avoid; }

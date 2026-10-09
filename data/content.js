@@ -36,8 +36,9 @@ export default {
     'My current research focuses on <b>scalable LLM pre-training and architectures</b>, with the aim of making large language models <em>more capable and more efficient to build</em>. I work on mixture-of-experts, conditional memory, and the stability and efficiency of training. Previously, I worked on <b>model merging and knowledge transfer</b>, such as data-free merging with task vectors and knowledge distillation. I also worked on <b>reasoning</b> through self-training and data synthesis.',
   ],
 
+  // each area, then its topics (one line each)
   interests: [
-    { label: 'LLM Pre-training & Architecture', detail: 'Mixture-of-Experts, conditional memory, training stability & efficiency' },
+    { label: 'LLM Pre-training & Architecture', topics: ['Mixture-of-Experts', 'Conditional Memory', 'Training Stability & Efficiency'] },
   ],
 
   // newest first; date format YYYY.MM; text is (html) and may reference papers by id via {paper:id}
