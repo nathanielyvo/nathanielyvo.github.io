@@ -352,7 +352,7 @@ export default {
       id: 'sigma',
       short: 'SIGMA',
       title: 'SIGMA: An AI-Empowered Training Stack on Early-Life Hardware',
-      authors: ['Lei Qu', 'Lianhai Ren', 'Peng Cheng', 'Rui Gao', 'Ruizhe Wang', 'Tianyu Chen', 'Xiao Liu', 'Xingjian Zhang', 'Yeyun Gong', 'Yifan Xiong', 'Yucheng Ding', 'Yuting Jiang', 'Zhenghao Lin', 'Zhongxin Guo', 'Ziyue Yang'],
+      authors: ['SIGMA Team'],
       role: 'Contributor',
       venue: 'Technical Report',
       venueNote: '',

@@ -866,7 +866,6 @@ const footer = () => `<footer class="colophon">
   <div class="row">
     <div class="main">
       <p>© ${lastUpdated.year} ${esc(P.name)} <span lang="zh-Hans" class="zh">${esc(P.nameZh)}</span><span class="sep" aria-hidden="true"> · </span><span class="updated">Last updated <time datetime="${lastUpdated.iso}">${lastUpdated.text}</time></span></p>
-      <p class="fine">Set in EB Garamond.</p>
     </div>
     <div class="side"><a class="to-top" href="#top">${I.up}<span>Back to top</span></a></div>
   </div>

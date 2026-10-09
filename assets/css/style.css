@@ -470,7 +470,6 @@ html:not(.js) .pub-bib .panel-bar { display: none; }   /* the summary already sa
 .colophon > .row { align-items: baseline; background: linear-gradient(var(--rule), var(--rule)) top / 100% 1px no-repeat; background-origin: content-box; background-clip: content-box; }
 .colophon > .row > * { padding-top: 1.15rem; }
 .colophon p { font-size: var(--fs-xs); color: var(--ink-3); line-height: 1.5; }
-.colophon .fine { font-style: italic; margin-top: .15rem; }
 .colophon .zh { font-size: .9em; letter-spacing: .06em; }
 .to-top { display: inline-flex; align-items: center; gap: .35em; font-size: var(--fs-label); letter-spacing: var(--track); color: var(--ink-3); text-decoration: none; }
 .to-top:hover { color: var(--accent); }
@@ -657,7 +656,7 @@ html:not(.js) .pub-bib .panel-bar { display: none; }   /* the summary already sa
   }
   html, body { background: #fff !important; color: #000; }
   body { font-size: 10.5pt; line-height: 1.4; }
-  .masthead, .skip, .filter, .pub-links, .pub-panel, .plate, .pub-tags, .lightbox, .to-top, .theme-toggle, .au-more, .more, .colophon .fine, #news, .interests { display: none !important; }
+  .masthead, .skip, .filter, .pub-links, .pub-panel, .plate, .pub-tags, .lightbox, .to-top, .theme-toggle, .au-more, .more, #news, .interests { display: none !important; }
   .js .news-older, .pub-authors .au-hidden { display: inline !important; }
   .points li::before { color: var(--ink-3); }   /* --ctl is not reset for print: the list dash prints dark like its text */
   .bar, .sec, .colophon > .row { max-width: none; padding: 0; }
