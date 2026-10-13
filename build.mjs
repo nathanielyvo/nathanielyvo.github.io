@@ -799,6 +799,12 @@ function jsonLd() {
 // and opens the publication list on "Selected" unless the address asks for ?pubs=all.
 const themeBoot = `(function(){var d=document.documentElement,t=null,q=null,s=null;d.className+=' js';try{s=new URLSearchParams(location.search);q=s.get('theme')}catch(e){}if(!s||s.get('pubs')!=='all')d.className+=' pubs-sel';if(q==='dark'||q==='light')t=q;else{try{t=localStorage.getItem('theme')}catch(e){}if(t!=='dark'&&t!=='light')t=null}if(t){d.setAttribute('data-theme',t);var m=document.querySelectorAll('meta[name="theme-color"]');for(var i=0;i<m.length;i++)m[i].content=d.getAttribute('data-paper-'+t)}})();`;
 
+function verificationMeta() {
+  const V = C.meta.verification || {};
+  return (V.google ? `<meta name="google-site-verification" content="${esc(V.google)}">\n` : '')
+    + (V.bing ? `<meta name="msvalidate.01" content="${esc(V.bing)}">\n` : '');
+}
+
 function head({ title, description, canonical, robots = 'index, follow', assetBase = BASE, social = true, inlineCss = '' }) {
   // Open Graph needs an ABSOLUTE image URL — Facebook, LinkedIn and WeChat do not resolve a relative one, and a
   // relative value makes them drop the card entirely. Until the public address is configured there is nothing
@@ -816,7 +822,7 @@ function head({ title, description, canonical, robots = 'index, follow', assetBa
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(description)}">
 <meta name="robots" content="${robots}">
-<meta name="color-scheme" content="light dark">
+${social ? verificationMeta() : ''}<meta name="color-scheme" content="light dark">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="${THEME.light}">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="${THEME.dark}">
 <script>${themeBoot}</script>

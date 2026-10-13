@@ -11,6 +11,9 @@ export default {
     // Public address of the site, with a trailing slash. Used for the canonical link, og:url, og:image,
     // the JSON-LD url/@id, sitemap.xml, the link home in 404.html, and the address printed on the CV.
     url: 'https://nathanielyvo.github.io/',
+    // Ownership tokens for Google Search Console and Bing Webmaster Tools; emitted on index.html only. Keep them:
+    // removing one un-verifies the site.
+    verification: { google: 'YMUrnRa0pIzkZvbB70U6_MxRqGrt2tDwE0Ejd6AZ7mM', bing: '' },
   },
 
   person: {
