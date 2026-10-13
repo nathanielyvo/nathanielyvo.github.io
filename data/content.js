@@ -5,7 +5,8 @@ export default {
   meta: {
     siteTitle: 'Runxi Cheng 程润曦 · LLM Pre-training',
     description:
-      'Runxi Cheng (程润曦) — LLM pre-training researcher; Master\'s in Artificial Intelligence, Tsinghua University. Research on LLM pre-training and architectures, such as mixture-of-experts and conditional memory; previously model merging, knowledge distillation and reasoning.',
+      // At most 160 characters: Bing Webmaster flags longer ones as an error, and search snippets cut them off.
+      'Runxi Cheng (程润曦) — LLM pre-training researcher; Master\'s in AI, Tsinghua University. Research on LLM architectures: mixture-of-experts and conditional memory.',
     keywords: ['Runxi Cheng', '程润曦', 'Tsinghua University', 'LLM pre-training', 'Mixture-of-Experts', 'Model Merging', 'Knowledge Distillation', 'Reasoning'],
     lastUpdated: '2026-10',
     // Public address of the site, with a trailing slash. Used for the canonical link, og:url, og:image,
